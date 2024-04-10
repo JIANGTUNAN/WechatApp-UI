@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "detail",
+  "usingComponents": {
+    "u-number-box": "/uview-ui/components/u-number-box/u-number-box",
+    "u-badge": "/uview-ui/components/u-badge/u-badge",
+    "u-icon": "/uview-ui/components/u-icon/u-icon"
+  }
+}
