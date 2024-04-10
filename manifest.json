@@ -47,7 +47,7 @@
                 "oauth" : {
                     "weixin" : {
                         "appid" : "wx376e58abd9d81e28",
-						"appsecret":"208cc4d98e5ed1af7aea1155fef9c6b2",
+                        "appsecret" : "208cc4d98e5ed1af7aea1155fef9c6b2",
                         "UniversalLinks" : ""
                     }
                 }
@@ -60,7 +60,8 @@
     "mp-weixin" : {
         "appid" : "wx946cdd4b2bf0aa27",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : false
         },
         "usingComponents" : true
     }
