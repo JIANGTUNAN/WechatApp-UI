@@ -1,0 +1,106 @@
+.search.data-v-4cedc0c6 {
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+.search .nav.data-v-4cedc0c6 {
+  height: 100rpx;
+  padding: 0 30rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.search .nav .nav-search-box.data-v-4cedc0c6 {
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+}
+.search .nav .nav-search-box .nav-left.data-v-4cedc0c6 {
+  margin-right: 30rpx;
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+.search .nav .nav-search-box .nav-left .back.data-v-4cedc0c6 {
+  line-height: 70rpx;
+  margin-right: 10rpx;
+}
+.search .nav .nav-search-box .nav-left .back-text.data-v-4cedc0c6 {
+  color: #0c34ba;
+  font-size: 28rpx;
+  line-height: 70rpx;
+}
+.search .nav .nav-search-box .nav-right.data-v-4cedc0c6 {
+  border-radius: 50rpx 0 0 50rpx;
+  padding-left: 20rpx;
+  background-color: #f7f8fa;
+  flex: 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search .nav .nav-search-box .nav-right .ipt.data-v-4cedc0c6 {
+  flex: 1;
+}
+.search .nav .nav-search-box .nav-right .cancel.data-v-4cedc0c6 {
+  width: 100rpx;
+  padding-right: 20rpx;
+  background-color: #fff;
+  text-align: center;
+  line-height: 70rpx;
+}
+.search .bg.data-v-4cedc0c6 {
+  height: 300rpx;
+  background-color: #0c34ba;
+}
+.search .product.data-v-4cedc0c6 {
+  position: relative;
+  top: -50rpx;
+  border-radius: 30rpx 30rpx 0 0;
+  padding: 20rpx;
+  padding-left: 5rpx;
+  margin: 0 30rpx;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+}
+.search .product .img-network.data-v-4cedc0c6 {
+  width: 100%;
+  display: block;
+}
+.search .product .product-box.data-v-4cedc0c6 {
+  width: 200rpx;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx;
+}
+.search .product .product-box .img-box.data-v-4cedc0c6 {
+  height: 200rpx;
+}
+.search .product .product-box .img-box .img.data-v-4cedc0c6 {
+  width: 100%;
+  display: block;
+}
+.search .product .product-box .common.data-v-4cedc0c6 {
+  text-align: start;
+  display: -webkit-box;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.search .product .product-box .product-name.data-v-4cedc0c6 {
+  font-size: 36rpx;
+  color: #646566;
+  margin: 10rpx 0;
+}
+.search .product .product-box .product-enname.data-v-4cedc0c6 {
+  font-size: 28rpx;
+  color: #999;
+  margin: 10rpx 0;
+}
+.search .product .product-box .product-price.data-v-4cedc0c6 {
+  color: #0c34ba;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
