@@ -3,28 +3,25 @@
 		<!-- 背景图 -->
 		<view class="nav-bg">
 			<view class="img-box">
-				<image src="https://img0.baidu.com/it/u=1194719978,69361099&fm=11&fmt=auto&gp=0.jpg" mode="widthFix "
-					class="img"></image>
 			</view>
 		</view>
 		<view class="popup">
 			<view class="popup-title">
 				<view class="popup-left">
 					<view class="img-box">
-						<image :src="myList.userImg" mode="widthFix" class="img"></image>
+						<u-avatar :src="avatarUrl" :size='75'></u-avatar>
 					</view>
 				</view>
 				<view class="popup-right">
 					<view class="popup-right-title">
-						Allen
+						{{nickName}}
 					</view>
 					<view class="popup-right-desc">
 						个人简介
 					</view>
 				</view>
 			</view>
-			<view class="popup-item" v-for="(item,index) in list" 
-			:key="item.id" @click="goToPages(item,index)">
+			<view class="popup-item" v-for="(item,index) in list" :key="item.id" @click="goToPages(item,index)">
 				<view class="popup-item-left">
 					{{item.title}}
 				</view>
@@ -42,49 +39,30 @@
 		data() {
 			return {
 				myList: "",
+				avatarUrl:'',
+				nickName:'Allen',
 				list: [{
 						title: "个人资料",
 						url: "./proile/data/data",
 						id: 1
 					},
 					{
-						title: "我的订单",
-						url: "./proile/order/order",
-						id: 2
-					},
-					{
-						title: "我的收藏",
+						title: "我的集咖",
 						url: "./proile/collection/collection",
-						id: 3
-					},
-					{
-						title: "地址管理",
-						url: "./proile/address/address",
-						id: 4
+						id: 2
 					},
 				]
 			}
 		},
 
 		methods: {
-			async getFindeMy() {
-				let res = await this.$myRequest({
-					url: "/findMy"
-				})
-				if(res[1].data.code==200){
-					this.myList = res[1].data.result[0]
-				}
-				if(res[1].data.code==700){
-						uni.navigateTo({
-							url:"../login/login"
-						})
-				}
-
-
+			getFindeMy() {
+				const data = uni.getStorageSync('userInfo');
+				console.log(111, data);
 			},
-			goToPages(item,index){
+			goToPages(item, index) {
 				uni.navigateTo({
-					url:item.url
+					url: item.url
 				})
 			},
 			onLoad() {
@@ -95,8 +73,12 @@
 </script>
 
 <style lang="scss">
+	uni-page-body{
+		height: 100%;
+	}
 	.my {
 		background-color: #f7f7f7;
+		height: 100%;
 
 		.nav-bg {
 			.img-box {
@@ -118,18 +100,16 @@
 			margin: 0 30rpx;
 			overflow: hidden;
 			background-image: linear-gradient(rgba(255, 255, 255, 0.3), #fff, #fff);
-
 			.popup-title {
 				margin-bottom: 75rpx;
 				display: flex;
 
 				.popup-left {
-					flex: 3;
+					flex: 30%;
 
 					.img-box {
 						width: 150rpx;
 						height: 150rpx;
-						border-radius: 50%;
 						overflow: hidden;
 
 						.img {
@@ -139,8 +119,7 @@
 				}
 
 				.popup-right {
-					flex: 7;
-
+					flex: 70%;
 					.popup-right-title {
 						color: #0c34ba;
 						font-size: 40rpx;

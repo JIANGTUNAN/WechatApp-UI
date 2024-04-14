@@ -1,24 +1,12 @@
 {
 	"easycom": {
-		// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [
 		{
-			"path": "pages/home/home",
-			"style": {
-				"navigationBarTitleText": "home",
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": false
-				}
-			}
-		},
-		{
 			"path": "pages/map/map",
 			"style": {
-				"navigationBarTitleText": "map",
-
+				// "navigationBarTitleText": "map",
 				"app-plus": {
 					"titleNView": false
 				}
@@ -27,92 +15,114 @@
 		{
 			"path": "pages/my/my",
 			"style": {
-				"app-plus":{
-					"titleNView":false
+				"app-plus": {
+					"titleNView": false
 				}
 			}
 
 		},
 		{
-			"path":"pages/detail/detail",
+			"path": "pages/comment/index",
 			"style": {
-				"navigationBarTitleText": "detail"
+				"navigationBarTitleText": "全部评论"
 			}
-		
 		},
 		{
-			"path":"pages/comment/comment",
+			"path": "pages/comment/reply",
 			"style": {
-				"navigationBarTitleText": "shopping",
-				"app-plus":{
-					"titleNView":false
-				}
+				"navigationBarTitleText": "评论详情"
 			}
-		
 		},
 		{
-			"path":"pages/search/search",
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "店铺详情"
+			}
+
+		},
+		{
+			"path": "pages/search/search",
 			"style": {
 				//小程序 去顶
-				"navigationStyle":"custom",
+				"navigationStyle": "custom",
 				// h5  去顶
-				"app-plus":{
-					"titleNView":false
+				"app-plus": {
+					"titleNView": false
 				}
 			}
-		
+
 		},
 		{
-			"path":"pages/login/login",
+			"path": "pages/login/login",
 			"style": {
 				//小程序 去顶
-				"navigationStyle":"custom",
+				"navigationStyle": "custom",
 				// h5  去顶
-				"app-plus":{
-					"titleNView":false
+				"app-plus": {
+					"titleNView": false
 				}
 			}
-		
+
 		},
 		{
-			"path":"pages/my/proile/data/data",
+			"path": "pages/my/proile/data/data",
 			"style": {
-				
+
 			}
-		
+
 		},
 		{
-			"path":"pages/my/proile/address/address",
+			"path": "pages/my/proile/address/address",
 			"style": {
-				
+
 			}
-		
+
 		},
 		{
-			"path":"pages/my/proile/collection/collection",
+			"path": "pages/my/proile/collection/collection",
 			"style": {
-				
+				"navigationBarTitleText": "我的集咖"
 			}
-		
+
 		},
 		{
-			"path":"pages/my/proile/order/order",
+			"path": "pages/my/proile/order/order",
 			"style": {
-				
+
 			}
-		
+
 		},
 		{
-			"path":"pages/proil/mys/mys",
+			"path": "pages/proil/mys/mys",
 			"style": {
-				
+
 			}
-		
+
+		}, {
+			"path": "pages/wiki/wiki",
+			"style": {
+				// "navigationBarTitleText": "咖啡豆科普",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	],
+	    ,{
+            "path" : "pages/wiki/bean_detail",
+            "style" :                                                                                    
+            {
+				//小程序 去顶
+				"navigationStyle": "custom",
+				// h5  去顶
+				"app-plus": {
+					"titleNView": false
+				}
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "畅享咖",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
@@ -123,13 +133,6 @@
 		"color": "#646566",
 		"selectedColor": "#0c34ba",
 		"list": [{
-				"text": "首页",
-				"pagePath": "pages/home/home",
-				"iconPath": "static/images/home.png",
-				"selectedIconPath": "static/images/home_active.png"
-
-			},
-			{
 				"text": "地图",
 				"pagePath": "pages/map/map",
 				"iconPath": "static/images/map.png",
@@ -137,10 +140,10 @@
 
 			},
 			{
-				"text": "评论",
-				"pagePath": "pages/comment/comment",
-				"iconPath": "static/images/comment.png",
-				"selectedIconPath": "static/images/comment_active.png"
+				"text": "咖啡豆科普",
+				"pagePath": "pages/wiki/wiki",
+				"iconPath": "static/images/wiki.png",
+				"selectedIconPath": "static/images/wiki_active.png"
 
 			},
 			{

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-	import request from "../../request/request.js"
+	import request from "@/request/request.js"
 	export default {
 		data() {
 			return {
@@ -55,54 +55,50 @@
 				uni.login({
 					provider: 'weixin',
 					success: function(loginRes) {
+						const code = loginRes.code
 						// 获取用户信息
 						uni.getUserInfo({
 							provider: 'weixin',
 							success: function(infoRes) {
+								const {
+									avatarUrl,
+									nickName
+								} = infoRes.userInfo;
 								console.log('infoRes', infoRes, loginRes);
-								// uni.showToast({
-								// 	title: JSON.stringify(infoRes),
-								// 	icon: 'success',
-								// 	duration: 20000
-								// })  
+								request({
+									url: "/app/login",
+									method: 'POST',
+									useToken: false,
+									data: {
+										code,
+										avatarUrl,
+										nickName
+									}
+								}).then(res => {
+									uni.showToast({
+										title: JSON.stringify(infoRes),
+										icon: 'success',
+										duration: 2000,
+										success: function() {
+											uni.switchTab({
+												url: '/pages/map/map'
+											});
+											uni.setStorage({ //存入Storage
+												key: 'userInfo', 
+												data: {
+													avatarUrl,
+													nickName
+												}
+											})
+										}
+									})
+
+								})
 							}
 						});
 					}
 				});
 			},
-			goTo() {
-				request({
-					url: "/login",
-					method: "POST",
-					data: {
-						password: this.form.password,
-						phone: this.form.number
-					},
-					success: (res) => {
-						let {
-							token
-						} = res.data
-						uni.setStorageSync('token', token)
-						console.log(res)
-						if (res.data.code == 200) {
-							uni.showToast({
-								title: res.data.msg,
-								icon: "none",
-								mask: true,
-								duration: 1000
-							})
-							setTimeout(() => {
-								uni.switchTab({
-									url: "../home/home"
-								})
-							}, 1000)
-						}
-
-
-					}
-				})
-			},
-
 		},
 		onLoad(options) {
 			const hideTip = options.hideTip || false;
@@ -116,7 +112,7 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 	.login {
 		.nav {
 			height: 120rpx;

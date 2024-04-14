@@ -5,7 +5,7 @@ import uView from "uview-ui";
 //全局 导入 request方法
 import request from "./request/request.js"
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 // 将requset 挂载到vue原型上
 Vue.prototype.$myRequest=request
 

@@ -32,7 +32,7 @@
 				})
 			},
 			getImg(base64) {
-				this.$myRequest({
+				this.$request({
 					url: "/updateUserBg",
 					method: "POST",
 					data: {
@@ -51,7 +51,7 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 	.img-box {
 		width: 200rpx;
 		height: 200rpx;

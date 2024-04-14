@@ -1464,7 +1464,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8556,7 +8556,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8577,14 +8577,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8670,7 +8670,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"rx","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -18385,7 +18385,13 @@ if (false) {} else {
   //开发环境
   baseUrl = "http://www.kangliuyong.com:10002";
 }
-var request = function request(options) {
+var request = function request() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var
+
+  url =
+
+
+
+  options.url,_options$data = options.data,data = _options$data === void 0 ? {} : _options$data,method = options.method,_options$useToken = options.useToken,useToken = _options$useToken === void 0 ? true : _options$useToken;
   //拼接接口
   options.url = baseUrl + options.url;
   // 判断 data 是否 是对象类型
@@ -18406,9 +18412,11 @@ var request = function request(options) {
   if (token) {
     options.data.tokenString = token;
   } else {
-    uni.navigateTo({
-      url: "../login/login" });
+    if (!useToken) {
+      uni.navigateTo({
+        url: "../login/login" });
 
+    }
   }
 
   return uni.request(options);
@@ -18520,7 +18528,88 @@ module.exports = "/static/images/login-bgc.jpg";
 /* 228 */,
 /* 229 */,
 /* 230 */,
-/* 231 */
+/* 231 */,
+/* 232 */
+/*!************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/pages/wiki/bean_wiki.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [{
+  "title": "阿拉比卡",
+  "content": "\n占当今世界60％以上的商业咖啡豆种植量的阿拉比卡咖啡豆是您当地超市可购买的大多数预磨和包装咖啡中发现的类型，也是最常见的整粒咖啡豆。简而言之，如果您正在喝一杯咖啡，则可能是阿拉伯咖啡。通常，阿拉比卡咖啡豆的不同密切相关品种的混合物将用于生产商业品牌的咖啡（Folgers，Maxwell House等）。阿拉比卡咖啡豆是两种主要类型中较温和的一种，咖啡因含量通常在1％至1.5％之间。" },
+
+{
+  "title": "哥伦比亚菜",
+  "content": "\n哥伦比亚虽然在咖啡豆总产量中排名第三（仅次于巴西和越南），但在阿拉比卡咖啡豆的种植方面居世界领先地位，并生产一些世界上最美味的咖啡豆。哥伦比亚生产许多阿拉比卡咖啡豆的品种和变种（以下将讨论其中的几种），而不是单一类型的“哥伦比亚咖啡豆”，但我们将它们归为一类，因为……好吧，它们属于其类别拥有。\n咖啡厂首次引入哥伦比亚后期18日世纪，由1810豆已经被商业化出口。由于气候条件，地形，土壤的整体组成以及哥伦比亚种植者对细节的关注，咖啡植株适应性良好，并迅速传播。今天，哥伦比亚每年向美国（最大的客户），西欧和日本出口约1000万袋（每袋重150磅/70公斤）。\n无论哪种类型或品种，哥伦比亚咖啡豆都比世界其他地区种植的相同类型的咖啡豆要温和一些。它们通常还具有较低的总酸度，以及较低的咖啡因含量。哥伦比亚咖啡豆通常能够很好地经受所有类型的烘烤（浅色，中度和深色），并且通常将几种不同的咖啡豆混合在一起，制成通常在超市货架上可以找到的研磨咖啡。\n六十多年来，“100％哥伦比亚咖啡”一直是美国和欧洲市场的黄金标准，尽管在过去十年左右的时间里，随着“美食”咖啡市场的增长，这种情况有所减少。但是，当您在当地的星巴克或其他特色咖啡店购买这种超赞的咖啡时，一杯昂贵的咖啡的赔率就很高，您将喝到哥伦比亚生产的阿拉比卡咖啡产品。" },
+
+{
+  "title": "波旁酒",
+  "content": "\n波旁咖啡豆完全与同名的美国威士忌无关，可能起源于也门南部。这是第一次在商业上18的后期制作个世纪在当时被称为伊利诺伊波旁-法国岛在印度洋马达加斯加以东现在叫团圆-之后将其命名。该植物后来被法国种植园主带到北非（现在仍作为经济作物种植）和后来的拉丁美洲。\n波旁咖啡工厂广泛种植在哥伦比亚，巴西和萨尔瓦多的部分地区以及北部非洲，生产的咖啡豆具有浓郁的，黄油般的，几乎像巧克力的味道，通常用于美食类咖啡中。咖啡豆在烘烤后通常会变成红棕色。咖啡因含量相对较低，而阿拉比卡咖啡豆的酸度水平约为平均水平。\n真正的“波旁”植物本身在较高海拔地区生长最佳，并且每株植物的豆产量不及其他许多类型，因此使“波本”成为相对昂贵的豆。然而，多年来，波旁威士忌已经与其他植物广泛杂交，并且是许多其他咖啡植物品种和杂种的“基础”。如今，许多以波旁威士忌形式出售的咖啡实际上就是其中的一种。" },
+
+{
+  "title": "Typica",
+  "content": "\n就像波旁威士忌一样，全世界出售的大多数Typica咖啡豆实际上都是Typica原始植物的杂交品种。实际上，当今商业种植的绝大多数阿拉比卡咖啡豆是源自波旁威士忌或Typica植物的杂种的后代。在许多情况下，混合咖啡将同时包含Typica和波旁豆。\n咖啡历史学家（是的，是一回事）对于Typica咖啡植物是否起源于埃塞俄比亚或也门持不同意见，但大多数人同意，它最初是由荷兰人和法国人进行商业种植，并首先穿过加勒比海，然后发展到1720年代的新世界。今天，Typica咖啡豆仍在整个加勒比海以及南美和中美洲，非洲和亚洲种植。\n大多数Typica咖啡豆品种经过烘烤后具有浓郁的巧克力棕色，比波旁威士忌稍长一些，并且在酿造时会具有更光滑，略带坚果的风味。不幸的是，Typica植物对疾病和寄生虫的敏感性也更高，这反过来又使它们的生长成本更高。近年来，许多主要的阿拉比卡生产国-特别是在南美-减少了Typica变种的种植，转而使用利润更高的波旁威士忌。" },
+
+{
+  "title": "蒙多·诺沃",
+  "content": "\nMundo Novo从葡萄牙语翻译为“新世界”，是当今世界上种植最广泛的咖啡豆之一。Mundo Novo起源于巴西，于1940年代初首次投放市场，是波旁威士忌的变种，在其祖国巴西，哥伦比亚和南美其他地区广泛种植。\nMundo Novo工厂往往比许多其他咖啡工厂高。每株植物可产生非常高的豆产量，并且对疾病具有卓越的抵抗力。Mundo Novo豆通常为红棕色，可以很好地经受所有类型的烘烤。咖啡因的含量大约是阿拉比卡咖啡豆的平均值，并且酸度低于平均水平，因此可以制成带有坚果味的平滑咖啡，并带有一点巧克力味。Mundo Novo豆广泛用于在美国和西欧流行的混合咖啡中。" },
+
+{
+  "title": "卡图拉",
+  "content": "\nCaturra是适应性强且高产的咖啡植物，是波旁威士忌植物的另一种栽培品种。而通过在20年初在巴西种植者首先发现了这种植物个世纪，广泛的商业化种植没有开始，直到70年代中期。尽管Caturra植物原产于巴西，但在那儿表现不佳，今天在哥伦比亚，危地马拉，洪都拉斯，巴拿马和哥斯达黎加的种植最为广泛。据估计，哥伦比亚种植的咖啡豆中有40％以上是Caturra咖啡豆。\nCaturra是较小和较短的咖啡植物之一，被认为是“矮小”植物，所产生的豆是相当酸性的，涉及咖啡因含量较低。Caturra是另一种最常在咖啡“混合物”中使用的咖啡豆，其风味较甜的饮料比许多其他南美咖啡都没有那么健壮，这有助于抵消掺混物中其他咖啡豆的苦味。" },
+
+{
+  "title": "卡图伊",
+  "content": "\nCatuai是Caturra和Mundo Novo植物的人工杂交种，因此是Bourbon的后代，于1949年在巴西圣保罗的Campinas农艺研究所开发。目前仍在巴西广泛种植（目前占巴西的近一半）。该国的阿拉比卡咖啡产量）和中美洲也广泛种植了卡图伊。像Caturra一样，Catuai是矮矮矮小的咖啡植物，单株和每英亩的单产都很高。樱桃也很牢固地附着在植物上，这使得该品种在大风和雨天地区特别受欢迎。\nCatuai豆也是在印度尼西亚进行商业种植的，具有相当的耐用性，并且特别适合深色烘焙，因此被用作许多商业上销售的“深色”混合咖啡的基础豆。像Caturra一样，Catuai的味道相当甜，而像Mundo Novo一样，酸度较低，咖啡因含量相对较低。" },
+
+{
+  "title": "帕卡马拉",
+  "content": "\nPacamara咖啡厂是另一种人造咖啡杂种，是Bourbon厂和Typica厂的后代。Pacamara咖啡于1958年在萨尔瓦多的萨尔瓦多咖啡研究所开发，如今已在整个中美洲广泛种植，特别是萨尔瓦多，危地马拉和哥斯达黎加。帕卡玛拉（Pacamara）被选为一种矮小，高产的Typica咖啡植物，可以抵抗疾病，并且可以在更高的海拔上繁衍生息。\n帕卡玛拉（Pacamara）豆是中美洲和南美洲生产的最大的咖啡豆之一，这是其发展的另一个目的。这种豆产生浓郁，高度芳香的饮料，带有巧克力味，果味和有些酸的味道-尤其是当轻轻烘烤时。由于其独特的风味和相对较高的价格，这些咖啡豆通常不用于商业咖啡混合物中。" },
+
+{
+  "title": "蓝山咖啡",
+  "content": "\n蓝山咖啡的历史可以追溯到1720年代，它起源于牙买加岛的蓝山地区（毫不奇怪），而该地区至今仍在种植。蓝山植物是一种典型的阿拉比卡咖啡，也曾在肯尼亚，海地，新几内亚，喀麦隆和美国夏威夷州进行商业种植-尽管只有蓝山或附近种植的咖啡豆才获得美国咖啡工业委员会的“认证”。牙买加（CIBJ）。\n蓝山咖啡植物对许多常见的攻击Typica植物的疾病具有天然抗性，并在较高的海拔高度生长，且火山土壤浓度更高，这使咖啡豆具有独特的风味。与大多数其他咖啡豆相比，它更圆润，风味十足，坚果味柔滑，具有较高的酸度和平均咖啡因含量。经过CIBJ认证的牙买加蓝山咖啡非常昂贵，每年约80％的农作物出口到日本。大多数美国和欧洲消费者都可以找到的是上面所列其他地区种植的质量较低（但仍非常美味）的蓝山“风格”咖啡豆。" },
+
+{
+  "title": "哈拉尔",
+  "content": "\nHarar是一种阿拉比卡咖啡，几乎只在其所在地区和原产国埃塞俄比亚的Harar种植。Harar植物可能是所有仍在商业种植的咖啡豆中最古老的（可追溯到1600年代中期），通常在很高的海拔高度（超过5,000英尺）上种植。咖啡豆经过数百年的独特加工工艺，经过手工挑选和烘焙（通常是轻度到中度），非常小批量。由豆类制成的饮料具有独特的果香，摩卡口味，中等酸度和相对较高的咖啡因含量。埃塞俄比亚本身就将哈拉尔的年产量中的大部分消费为“咖啡文化”的一部分。Harar咖啡也是埃塞俄比亚的主要出口产品之一，其最大的客户包括美国，欧盟和日本。" },
+
+{
+  "title": "科纳",
+  "content": "\n科纳咖啡生长在夏威夷大岛科纳地区的火山莫纳罗亚山和瓦拉莱的山坡上。Kona是在夏威夷（美国唯一的咖啡生产州）进行独家商业种植的阿拉比卡咖啡咖啡植物，它是从基督教传教士于1820年代初首次引入夏威夷的巴西咖啡菌株中自然衍生而来的。Kona咖啡豆因其香气和精致的水果风味而受到高度评价，可生产出一种低酸度的柔滑饮料。由于它们的相对稀有性，科纳咖啡豆非常昂贵，并且经常用于以科纳咖啡形式出售的高价混合咖啡。根据夏威夷州法律，“科纳混合”仅需使用10％的纯科纳豆即可使用。" },
+
+{
+  "title": "艺妓",
+  "content": "\n个啥（通常也被称为艺妓）的咖啡豆是最中（如果不是在大多数）昂贵的咖啡豆在世界上。Gesha起源于埃塞俄比亚东南部的Gesha村附近，是一种相当精致，劳动密集型的植物，在有限的基础上在其原生埃塞俄比亚，哥伦比亚，巴西，巴拿马和哥斯达黎加种植。艺ish豆通常在烘烤后呈红棕色，产生强烈的蜂蜜甜味，果味饮料，并具有高的酸度和焦糖香气。只有在2004年达到目前的流行程度（和高昂的价格），格沙咖啡才被许多咖啡鉴赏家认为是地球上最好的咖啡。购买一磅这些咖啡豆的费用可能在150美元到250美元之间，这取决于原产国和其他因素。" },
+
+{
+  "title": "罗布斯塔",
+  "content": "\n其他主要的商业种植咖啡豆类型，占世界咖啡豆产量的35％以上，罗布斯塔咖啡豆起源于中非，目前在越南（占产量的40％以上），印度尼西亚，印度，巴西，和乌干达。罗布斯塔植物通常比其阿拉比卡兄弟表亲更坚硬，更容易种植，更高的产量以及对疾病的抵抗力。不幸的是，这种豆还产生了劣等的饮料-在大多数情况下，对于大多数人来说实际上是无法饮用的-这种豆非常苦，咖啡因含量（占苦味）几乎是大多数阿拉比卡品种的三倍。\n尽管您通常在当地市场上找不到罗布斯塔（Robusta）咖啡豆，但它们广泛用于浓缩咖啡混合物中（通常占混合物的10％到15％），以增加饮料的口感，并用于各种速溶咖啡（通常以大约相同的百分比）。罗布斯塔磨豆还经常用于生产劣质，廉价的咖啡混合物，以降低成本（不幸的是降低风味）。" },
+
+{
+  "title": "利比里卡",
+  "content": "\n利比里卡咖啡工厂仅占全球咖啡产量的不到1％，它原产于中非和西非（仍在野外生长），并在印度尼西亚和菲律宾进行了小规模的商业种植。这种植物的豆子被用来制作kapeng barako或barako咖啡，这是一种相当浓烈的苦味饮料，在菲律宾很受欢迎。Liberica咖啡豆在某些水疗护理中也被用作身体磨砂膏。" }];exports.default = _default;
+
+/***/ }),
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */
 /*!************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-icon/icons.js ***!
   \************************************************************************/
@@ -18743,7 +18832,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'uicon-en': "\uE692" };exports.default = _default;
 
 /***/ }),
-/* 232 */
+/* 249 */
 /*!************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-icon/props.js ***!
   \************************************************************************/
@@ -18840,309 +18929,247 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */
-/*!******************************************************************************!*\
-  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-number-box/props.js ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  props: {
-    // 步进器标识符，在change回调返回
-    name: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.name },
-
-    // 用于双向绑定的值，初始化时设置设为默认min值(最小值)
-    value: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.value },
-
-    // 最小值
-    min: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.min },
-
-    // 最大值
-    max: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.max },
-
-    // 加减的步长，可为小数
-    step: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.step },
-
-    // 是否只允许输入整数
-    integer: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.integer },
-
-    // 是否禁用，包括输入框，加减按钮
-    disabled: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.disabled },
-
-    // 是否禁用输入框
-    disabledInput: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.disabledInput },
-
-    // 是否开启异步变更，开启后需要手动控制输入值
-    asyncChange: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.asyncChange },
-
-    // 输入框宽度，单位为px
-    inputWidth: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.inputWidth },
-
-    // 是否显示减少按钮
-    showMinus: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.showMinus },
-
-    // 是否显示增加按钮
-    showPlus: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.showPlus },
-
-    // 显示的小数位数
-    decimalLength: {
-      type: [String, Number, null],
-      default: uni.$u.props.numberBox.decimalLength },
-
-    // 是否开启长按加减手势
-    longPress: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.longPress },
-
-    // 输入框文字和加减按钮图标的颜色
-    color: {
-      type: String,
-      default: uni.$u.props.numberBox.color },
-
-    // 按钮大小，宽高等于此值，单位px，输入框高度和此值保持一致
-    buttonSize: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.buttonSize },
-
-    // 输入框和按钮的背景颜色
-    bgColor: {
-      type: String,
-      default: uni.$u.props.numberBox.bgColor },
-
-    // 指定光标于键盘的距离，避免键盘遮挡输入框，单位px
-    cursorSpacing: {
-      type: [String, Number],
-      default: uni.$u.props.numberBox.cursorSpacing },
-
-    // 是否禁用增加按钮
-    disablePlus: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.disablePlus },
-
-    // 是否禁用减少按钮
-    disableMinus: {
-      type: Boolean,
-      default: uni.$u.props.numberBox.disableMinus },
-
-    // 加减按钮图标的样式
-    iconStyle: {
-      type: [Object, String],
-      default: uni.$u.props.numberBox.iconStyle } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */
-/*!*************************************************************************!*\
-  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-badge/props.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  props: {
-    // 是否显示圆点
-    isDot: {
-      type: Boolean,
-      default: uni.$u.props.badge.isDot },
-
-    // 显示的内容
-    value: {
-      type: [Number, String],
-      default: uni.$u.props.badge.value },
-
-    // 是否显示
-    show: {
-      type: Boolean,
-      default: uni.$u.props.badge.show },
-
-    // 最大值，超过最大值会显示 '{max}+'
-    max: {
-      type: [Number, String],
-      default: uni.$u.props.badge.max },
-
-    // 主题类型，error|warning|success|primary
-    type: {
-      type: String,
-      default: uni.$u.props.badge.type },
-
-    // 当数值为 0 时，是否展示 Badge
-    showZero: {
-      type: Boolean,
-      default: uni.$u.props.badge.showZero },
-
-    // 背景颜色，优先级比type高，如设置，type参数会失效
-    bgColor: {
-      type: [String, null],
-      default: uni.$u.props.badge.bgColor },
-
-    // 字体颜色
-    color: {
-      type: [String, null],
-      default: uni.$u.props.badge.color },
-
-    // 徽标形状，circle-四角均为圆角，horn-左下角为直角
-    shape: {
-      type: String,
-      default: uni.$u.props.badge.shape },
-
-    // 设置数字的显示方式，overflow|ellipsis|limit
-    // overflow会根据max字段判断，超出显示`${max}+`
-    // ellipsis会根据max判断，超出显示`${max}...`
-    // limit会依据1000作为判断条件，超出1000，显示`${value/1000}K`，比如2.2k、3.34w，最多保留2位小数
-    numberType: {
-      type: String,
-      default: uni.$u.props.badge.numberType },
-
-    // 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，absolute为true时有效
-    offset: {
-      type: Array,
-      default: uni.$u.props.badge.offset },
-
-    // 是否反转背景和字体颜色
-    inverted: {
-      type: Boolean,
-      default: uni.$u.props.badge.inverted },
-
-    // 是否绝对定位
-    absolute: {
-      type: Boolean,
-      default: uni.$u.props.badge.absolute } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 249 */,
 /* 250 */,
 /* 251 */,
 /* 252 */,
 /* 253 */,
 /* 254 */,
 /* 255 */,
-/* 256 */
-/*!****************************************************************************!*\
-  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-checkbox/props.js ***!
-  \****************************************************************************/
+/* 256 */,
+/* 257 */
+/*!**************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-avatar/props.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
   props: {
-    // checkbox的名称
-    name: {
-      type: [String, Number, Boolean],
-      default: uni.$u.props.checkbox.name },
+    // 头像图片路径(不能为相对路径)
+    src: {
+      type: String,
+      default: uni.$u.props.avatar.src },
 
-    // 形状，square为方形，circle为圆型
+    // 头像形状，circle-圆形，square-方形
     shape: {
       type: String,
-      default: uni.$u.props.checkbox.shape },
+      default: uni.$u.props.avatar.shape },
 
-    // 整体的大小
+    // 头像尺寸
     size: {
       type: [String, Number],
-      default: uni.$u.props.checkbox.size },
+      default: uni.$u.props.avatar.size },
 
-    // 是否默认选中
-    checked: {
+    // 裁剪模式
+    mode: {
+      type: String,
+      default: uni.$u.props.avatar.mode },
+
+    // 显示的文字
+    text: {
+      type: String,
+      default: uni.$u.props.avatar.text },
+
+    // 背景色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.avatar.bgColor },
+
+    // 文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.avatar.color },
+
+    // 文字大小
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.avatar.fontSize },
+
+    // 显示的图标
+    icon: {
+      type: String,
+      default: uni.$u.props.avatar.icon },
+
+    // 显示小程序头像，只对百度，微信，QQ小程序有效
+    mpAvatar: {
       type: Boolean,
-      default: uni.$u.props.checkbox.checked },
+      default: uni.$u.props.avatar.mpAvatar },
 
-    // 是否禁用
-    disabled: {
-      type: [String, Boolean],
-      default: uni.$u.props.checkbox.disabled },
+    // 是否使用随机背景色
+    randomBgColor: {
+      type: Boolean,
+      default: uni.$u.props.avatar.randomBgColor },
 
-    // 选中状态下的颜色，如设置此值，将会覆盖parent的activeColor值
-    activeColor: {
+    // 加载失败的默认头像(组件有内置默认图片)
+    defaultUrl: {
       type: String,
-      default: uni.$u.props.checkbox.activeColor },
+      default: uni.$u.props.avatar.defaultUrl },
 
-    // 未选中的颜色
-    inactiveColor: {
-      type: String,
-      default: uni.$u.props.checkbox.inactiveColor },
-
-    // 图标的大小，单位px
-    iconSize: {
+    // 如果配置了randomBgColor为true，且配置了此值，则从默认的背景色数组中取出对应索引的颜色值，取值0-19之间
+    colorIndex: {
       type: [String, Number],
-      default: uni.$u.props.checkbox.iconSize },
+      // 校验参数规则，索引在0-19之间
+      validator: function validator(n) {
+        return uni.$u.test.range(n, [0, 19]) || n === '';
+      },
+      default: uni.$u.props.avatar.colorIndex },
 
-    // 图标颜色
-    iconColor: {
+    // 组件标识符
+    name: {
       type: String,
-      default: uni.$u.props.checkbox.iconColor },
-
-    // label提示文字，因为nvue下，直接slot进来的文字，由于特殊的结构，无法修改样式
-    label: {
-      type: [String, Number],
-      default: uni.$u.props.checkbox.label },
-
-    // label的字体大小，px单位
-    labelSize: {
-      type: [String, Number],
-      default: uni.$u.props.checkbox.labelSize },
-
-    // label的颜色
-    labelColor: {
-      type: String,
-      default: uni.$u.props.checkbox.labelColor },
-
-    // 是否禁止点击提示语选中复选框
-    labelDisabled: {
-      type: [String, Boolean],
-      default: uni.$u.props.checkbox.labelDisabled } } };exports.default = _default;
+      default: uni.$u.props.avatar.name } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 257 */,
 /* 258 */,
 /* 259 */,
 /* 260 */,
 /* 261 */,
 /* 262 */,
 /* 263 */,
-/* 264 */
+/* 264 */,
+/* 265 */
+/*!**************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-swiper/props.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 列表数组，元素可为字符串，如为对象可通过keyName指定目标属性名
+    list: {
+      type: Array,
+      default: uni.$u.props.swiper.list },
+
+    // 是否显示面板指示器
+    indicator: {
+      type: Boolean,
+      default: uni.$u.props.swiper.indicator },
+
+    // 指示器非激活颜色
+    indicatorActiveColor: {
+      type: String,
+      default: uni.$u.props.swiper.indicatorActiveColor },
+
+    // 指示器的激活颜色
+    indicatorInactiveColor: {
+      type: String,
+      default: uni.$u.props.swiper.indicatorInactiveColor },
+
+    // 指示器样式，可通过bottom，left，right进行定位
+    indicatorStyle: {
+      type: [String, Object],
+      default: uni.$u.props.swiper.indicatorStyle },
+
+    // 指示器模式，line-线型，dot-点型
+    indicatorMode: {
+      type: String,
+      default: uni.$u.props.swiper.indicatorMode },
+
+    // 是否自动切换
+    autoplay: {
+      type: Boolean,
+      default: uni.$u.props.swiper.autoplay },
+
+    // 当前所在滑块的 index
+    current: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.current },
+
+    // 当前所在滑块的 item-id ，不能与 current 被同时指定
+    currentItemId: {
+      type: String,
+      default: uni.$u.props.swiper.currentItemId },
+
+    // 滑块自动切换时间间隔
+    interval: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.interval },
+
+    // 滑块切换过程所需时间
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.duration },
+
+    // 播放到末尾后是否重新回到开头
+    circular: {
+      type: Boolean,
+      default: uni.$u.props.swiper.circular },
+
+    // 前边距，可用于露出前一项的一小部分，nvue和支付宝不支持
+    previousMargin: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.previousMargin },
+
+    // 后边距，可用于露出后一项的一小部分，nvue和支付宝不支持
+    nextMargin: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.nextMargin },
+
+    // 当开启时，会根据滑动速度，连续滑动多屏，支付宝不支持
+    acceleration: {
+      type: Boolean,
+      default: uni.$u.props.swiper.acceleration },
+
+    // 同时显示的滑块数量，nvue、支付宝小程序不支持
+    displayMultipleItems: {
+      type: Number,
+      default: uni.$u.props.swiper.displayMultipleItems },
+
+    // 指定swiper切换缓动动画类型，有效值：default、linear、easeInCubic、easeOutCubic、easeInOutCubic
+    // 只对微信小程序有效
+    easingFunction: {
+      type: String,
+      default: uni.$u.props.swiper.easingFunction },
+
+    // list数组中指定对象的目标属性名
+    keyName: {
+      type: String,
+      default: uni.$u.props.swiper.keyName },
+
+    // 图片的裁剪模式
+    imgMode: {
+      type: String,
+      default: uni.$u.props.swiper.imgMode },
+
+    // 组件高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.height },
+
+    // 背景颜色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.swiper.bgColor },
+
+    // 组件圆角，数值或带单位的字符串
+    radius: {
+      type: [String, Number],
+      default: uni.$u.props.swiper.radius },
+
+    // 是否加载中
+    loading: {
+      type: Boolean,
+      default: uni.$u.props.swiper.loading },
+
+    // 是否显示标题，要求数组对象中有title属性
+    showTitle: {
+      type: Boolean,
+      default: uni.$u.props.swiper.showTitle } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */
 /*!*************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-popup/props.js ***!
   \*************************************************************************/
@@ -19229,14 +19256,678 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */
+/*!*************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-empty/props.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 内置图标名称，或图片路径，建议绝对路径
+    icon: {
+      type: String,
+      default: uni.$u.props.empty.icon },
+
+    // 提示文字
+    text: {
+      type: String,
+      default: uni.$u.props.empty.text },
+
+    // 文字颜色
+    textColor: {
+      type: String,
+      default: uni.$u.props.empty.textColor },
+
+    // 文字大小
+    textSize: {
+      type: [String, Number],
+      default: uni.$u.props.empty.textSize },
+
+    // 图标的颜色
+    iconColor: {
+      type: String,
+      default: uni.$u.props.empty.iconColor },
+
+    // 图标的大小
+    iconSize: {
+      type: [String, Number],
+      default: uni.$u.props.empty.iconSize },
+
+    // 选择预置的图标类型
+    mode: {
+      type: String,
+      default: uni.$u.props.empty.mode },
+
+    //  图标宽度，单位px
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.empty.width },
+
+    // 图标高度，单位px
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.empty.height },
+
+    // 是否显示组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.empty.show },
+
+    // 组件距离上一个元素之间的距离，默认px单位
+    marginTop: {
+      type: [String, Number],
+      default: uni.$u.props.empty.marginTop } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */
+/*!************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-list/props.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 控制是否出现滚动条，仅nvue有效
+    showScrollbar: {
+      type: Boolean,
+      default: uni.$u.props.list.showScrollbar },
+
+    // 距底部多少时触发scrolltolower事件
+    lowerThreshold: {
+      type: [String, Number],
+      default: uni.$u.props.list.lowerThreshold },
+
+    // 距顶部多少时触发scrolltoupper事件，非nvue有效
+    upperThreshold: {
+      type: [String, Number],
+      default: uni.$u.props.list.upperThreshold },
+
+    // 设置竖向滚动条位置
+    scrollTop: {
+      type: [String, Number],
+      default: uni.$u.props.list.scrollTop },
+
+    // 控制 onscroll 事件触发的频率，仅nvue有效
+    offsetAccuracy: {
+      type: [String, Number],
+      default: uni.$u.props.list.offsetAccuracy },
+
+    // 启用 flexbox 布局。开启后，当前节点声明了display: flex就会成为flex container，并作用于其孩子节点，仅微信小程序有效
+    enableFlex: {
+      type: Boolean,
+      default: uni.$u.props.list.enableFlex },
+
+    // 是否按分页模式显示List，默认值false
+    pagingEnabled: {
+      type: Boolean,
+      default: uni.$u.props.list.pagingEnabled },
+
+    // 是否允许List滚动
+    scrollable: {
+      type: Boolean,
+      default: uni.$u.props.list.scrollable },
+
+    // 值应为某子元素id（id不能以数字开头）
+    scrollIntoView: {
+      type: String,
+      default: uni.$u.props.list.scrollIntoView },
+
+    // 在设置滚动条位置时使用动画过渡
+    scrollWithAnimation: {
+      type: Boolean,
+      default: uni.$u.props.list.scrollWithAnimation },
+
+    // iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只对微信小程序有效
+    enableBackToTop: {
+      type: Boolean,
+      default: uni.$u.props.list.enableBackToTop },
+
+    // 列表的高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.list.height },
+
+    // 列表宽度
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.list.width },
+
+    // 列表前后预渲染的屏数，1代表一个屏幕的高度，1.5代表1个半屏幕高度
+    preLoadScreen: {
+      type: [String, Number],
+      default: uni.$u.props.list.preLoadScreen }
+
+    // vue下，是否开启虚拟列表
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */
+/*!*****************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-list-item/props.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 用于滚动到指定item
+    anchor: {
+      type: [String, Number],
+      default: uni.$u.props.listItem.anchor } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */
+/*!************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-cell/props.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default2 = {
+  props: {
+    // 标题
+    title: {
+      type: [String, Number],
+      default: uni.$u.props.cell.title },
+
+    // 标题下方的描述信息
+    label: {
+      type: [String, Number],
+      default: uni.$u.props.cell.label },
+
+    // 右侧的内容
+    value: {
+      type: [String, Number],
+      default: uni.$u.props.cell.value },
+
+    // 左侧图标名称，或者图片链接(本地文件建议使用绝对地址)
+    icon: {
+      type: String,
+      default: uni.$u.props.cell.icon },
+
+    // 是否禁用cell
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.cell.disabled },
+
+    // 是否显示下边框
+    border: {
+      type: Boolean,
+      default: uni.$u.props.cell.border },
+
+    // 内容是否垂直居中(主要是针对右侧的value部分)
+    center: {
+      type: Boolean,
+      default: uni.$u.props.cell.center },
+
+    // 点击后跳转的URL地址
+    url: {
+      type: String,
+      default: uni.$u.props.cell.url },
+
+    // 链接跳转的方式，内部使用的是uView封装的route方法，可能会进行拦截操作
+    linkType: {
+      type: String,
+      default: uni.$u.props.cell.linkType },
+
+    // 是否开启点击反馈(表现为点击时加上灰色背景)
+    clickable: {
+      type: Boolean,
+      default: uni.$u.props.cell.clickable },
+
+    // 是否展示右侧箭头并开启点击反馈
+    isLink: {
+      type: Boolean,
+      default: uni.$u.props.cell.isLink },
+
+    // 是否显示表单状态下的必填星号(此组件可能会内嵌入input组件)
+    required: {
+      type: Boolean,
+      default: uni.$u.props.cell.required },
+
+    // 右侧的图标箭头
+    rightIcon: {
+      type: String,
+      default: uni.$u.props.cell.rightIcon },
+
+    // 右侧箭头的方向，可选值为：left，up，down
+    arrowDirection: {
+      type: String,
+      default: uni.$u.props.cell.arrowDirection },
+
+    // 左侧图标样式
+    iconStyle: {
+      type: [Object, String],
+      default: function _default() {
+        return uni.$u.props.cell.iconStyle;
+      } },
+
+    // 右侧箭头图标的样式
+    rightIconStyle: {
+      type: [Object, String],
+      default: function _default() {
+        return uni.$u.props.cell.rightIconStyle;
+      } },
+
+    // 标题的样式
+    titleStyle: {
+      type: [Object, String],
+      default: function _default() {
+        return uni.$u.props.cell.titleStyle;
+      } },
+
+    // 单位元的大小，可选值为large
+    size: {
+      type: String,
+      default: uni.$u.props.cell.size },
+
+    // 点击cell是否阻止事件传播
+    stop: {
+      type: Boolean,
+      default: uni.$u.props.cell.stop },
+
+    // 标识符，cell被点击时返回
+    name: {
+      type: [Number, String],
+      default: uni.$u.props.cell.name } } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */
+/*!**************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-navbar/props.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 是否开启顶部安全区适配
+    safeAreaInsetTop: {
+      type: Boolean,
+      default: uni.$u.props.navbar.safeAreaInsetTop },
+
+    // 固定在顶部时，是否生成一个等高元素，以防止塌陷
+    placeholder: {
+      type: Boolean,
+      default: uni.$u.props.navbar.placeholder },
+
+    // 是否固定在顶部
+    fixed: {
+      type: Boolean,
+      default: uni.$u.props.navbar.fixed },
+
+    // 是否显示下边框
+    border: {
+      type: Boolean,
+      default: uni.$u.props.navbar.border },
+
+    // 左边的图标
+    leftIcon: {
+      type: String,
+      default: uni.$u.props.navbar.leftIcon },
+
+    // 左边的提示文字
+    leftText: {
+      type: String,
+      default: uni.$u.props.navbar.leftText },
+
+    // 左右的提示文字
+    rightText: {
+      type: String,
+      default: uni.$u.props.navbar.rightText },
+
+    // 右边的图标
+    rightIcon: {
+      type: String,
+      default: uni.$u.props.navbar.rightIcon },
+
+    // 标题
+    title: {
+      type: [String, Number],
+      default: uni.$u.props.navbar.title },
+
+    // 背景颜色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.navbar.bgColor },
+
+    // 标题的宽度
+    titleWidth: {
+      type: [String, Number],
+      default: uni.$u.props.navbar.titleWidth },
+
+    // 导航栏高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.navbar.height },
+
+    // 左侧返回图标的大小
+    leftIconSize: {
+      type: [String, Number],
+      default: uni.$u.props.navbar.leftIconSize },
+
+    // 左侧返回图标的颜色
+    leftIconColor: {
+      type: String,
+      default: uni.$u.props.navbar.leftIconColor },
+
+    // 点击左侧区域(返回图标)，是否自动返回上一页
+    autoBack: {
+      type: Boolean,
+      default: uni.$u.props.navbar.autoBack },
+
+    // 标题的样式，对象或字符串
+    titleStyle: {
+      type: [String, Object],
+      default: uni.$u.props.navbar.titleStyle } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */
+/*!************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-text/props.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 主题颜色
+    type: {
+      type: String,
+      default: uni.$u.props.text.type },
+
+    // 是否显示
+    show: {
+      type: Boolean,
+      default: uni.$u.props.text.show },
+
+    // 显示的值
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.text.text },
+
+    // 前置图标
+    prefixIcon: {
+      type: String,
+      default: uni.$u.props.text.prefixIcon },
+
+    // 后置图标
+    suffixIcon: {
+      type: String,
+      default: uni.$u.props.text.suffixIcon },
+
+    // 文本处理的匹配模式
+    // text-普通文本，price-价格，phone-手机号，name-姓名，date-日期，link-超链接
+    mode: {
+      type: String,
+      default: uni.$u.props.text.mode },
+
+    // mode=link下，配置的链接
+    href: {
+      type: String,
+      default: uni.$u.props.text.href },
+
+    // 格式化规则
+    format: {
+      type: [String, Function],
+      default: uni.$u.props.text.format },
+
+    // mode=phone时，点击文本是否拨打电话
+    call: {
+      type: Boolean,
+      default: uni.$u.props.text.call },
+
+    // 小程序的打开方式
+    openType: {
+      type: String,
+      default: uni.$u.props.text.openType },
+
+    // 是否粗体，默认normal
+    bold: {
+      type: Boolean,
+      default: uni.$u.props.text.bold },
+
+    // 是否块状
+    block: {
+      type: Boolean,
+      default: uni.$u.props.text.block },
+
+    // 文本显示的行数，如果设置，超出此行数，将会显示省略号
+    lines: {
+      type: [String, Number],
+      default: uni.$u.props.text.lines },
+
+    // 文本颜色
+    color: {
+      type: String,
+      default: uni.$u.props.text.color },
+
+    // 字体大小
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.text.size },
+
+    // 图标的样式
+    iconStyle: {
+      type: [Object, String],
+      default: uni.$u.props.text.iconStyle },
+
+    // 文字装饰，下划线，中划线等，可选值 none|underline|line-through
+    decoration: {
+      type: String,
+      default: uni.$u.props.text.decoration },
+
+    // 外边距，对象、字符串，数值形式均可
+    margin: {
+      type: [Object, String, Number],
+      default: uni.$u.props.text.margin },
+
+    // 文本行高
+    lineHeight: {
+      type: [String, Number],
+      default: uni.$u.props.text.lineHeight },
+
+    // 文本对齐方式，可选值left|center|right
+    align: {
+      type: String,
+      default: uni.$u.props.text.align },
+
+    // 文字换行，可选值break-word|normal|anywhere
+    wordWrap: {
+      type: String,
+      default: uni.$u.props.text.wordWrap } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */
+/*!********************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-loading-icon/props.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 是否显示组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.loadingIcon.show },
+
+    // 颜色
+    color: {
+      type: String,
+      default: uni.$u.props.loadingIcon.color },
+
+    // 提示文字颜色
+    textColor: {
+      type: String,
+      default: uni.$u.props.loadingIcon.textColor },
+
+    // 文字和图标是否垂直排列
+    vertical: {
+      type: Boolean,
+      default: uni.$u.props.loadingIcon.vertical },
+
+    // 模式选择，circle-圆形，spinner-花朵形，semicircle-半圆形
+    mode: {
+      type: String,
+      default: uni.$u.props.loadingIcon.mode },
+
+    // 图标大小，单位默认px
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.size },
+
+    // 文字大小
+    textSize: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.textSize },
+
+    // 文字内容
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.text },
+
+    // 动画模式
+    timingFunction: {
+      type: String,
+      default: uni.$u.props.loadingIcon.timingFunction },
+
+    // 动画执行周期时间
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.duration },
+
+    // mode=circle时的暗边颜色
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.loadingIcon.inactiveColor } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */
+/*!************************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-swiper-indicator/props.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 轮播的长度
+    length: {
+      type: [String, Number],
+      default: uni.$u.props.swiperIndicator.length },
+
+    // 当前处于活动状态的轮播的索引
+    current: {
+      type: [String, Number],
+      default: uni.$u.props.swiperIndicator.current },
+
+    // 指示器非激活颜色
+    indicatorActiveColor: {
+      type: String,
+      default: uni.$u.props.swiperIndicator.indicatorActiveColor },
+
+    // 指示器的激活颜色
+    indicatorInactiveColor: {
+      type: String,
+      default: uni.$u.props.swiperIndicator.indicatorInactiveColor },
+
+    // 指示器模式，line-线型，dot-点型
+    indicatorMode: {
+      type: String,
+      default: uni.$u.props.swiperIndicator.indicatorMode } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */
 /*!***************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-overlay/props.js ***!
   \***************************************************************************/
@@ -19268,14 +19959,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */
 /*!******************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-transition/props.js ***!
   \******************************************************************************/
@@ -19307,7 +19998,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 281 */
+/* 361 */
 /*!***********************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-transition/transition.js ***!
   \***********************************************************************************/
@@ -19318,7 +20009,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));
 
 
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 282));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 362));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {return new Promise(function (resolve) {return setTimeout(resolve, 1000 / 50);});}; // nvue动画模块实现细节抽离在外部文件
 
 // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
@@ -19472,7 +20163,7 @@ var getClassNames = function getClassNames(name) {return {
     } } };exports.default = _default;
 
 /***/ }),
-/* 282 */
+/* 362 */
 /*!*************************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \*************************************************************************************/
@@ -19548,14 +20239,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     'leave-to': { opacity: 0, transform: 'scale(0.95)' } } };exports.default = _default;
 
 /***/ }),
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */
 /*!******************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-status-bar/props.js ***!
   \******************************************************************************/
@@ -19571,14 +20262,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */,
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */
 /*!*******************************************************************************!*\
   !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-safe-bottom/props.js ***!
   \*******************************************************************************/
@@ -19588,6 +20279,328 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
   props: {} };exports.default = _default;
+
+/***/ }),
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */
+/*!************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-line/props.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    color: {
+      type: String,
+      default: uni.$u.props.line.color },
+
+    // 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带px单位的值等
+    length: {
+      type: [String, Number],
+      default: uni.$u.props.line.length },
+
+    // 线条方向，col-竖向，row-横向
+    direction: {
+      type: String,
+      default: uni.$u.props.line.direction },
+
+    // 是否显示细边框
+    hairline: {
+      type: Boolean,
+      default: uni.$u.props.line.hairline },
+
+    // 线条与上下左右元素的间距，字符串形式，如"30px"、"20px 30px"
+    margin: {
+      type: [String, Number],
+      default: uni.$u.props.line.margin },
+
+    // 是否虚线，true-虚线，false-实线
+    dashed: {
+      type: Boolean,
+      default: uni.$u.props.line.dashed } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */
+/*!************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-text/value.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  computed: {
+    // 经处理后需要显示的值
+    value: function value() {var
+
+      text =
+
+
+
+      this.text,mode = this.mode,format = this.format,href = this.href;
+      // 价格类型
+      if (mode === 'price') {
+        // 如果text不为金额进行提示
+        if (!/^\d+(\.\d+)?$/.test(text)) {
+          uni.$u.error('金额模式下，text参数需要为金额格式');
+        }
+        // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的金额格式化处理
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }
+        // 如果format非正则，非函数，则使用默认的金额格式化方法进行操作
+        return uni.$u.priceFormat(text, 2);
+      }if (mode === 'date') {
+        // 判断是否合法的日期或者时间戳
+        !uni.$u.test.date(text) && uni.$u.error('日期模式下，text参数需要为日期或时间戳格式');
+        // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的格式化处理
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }if (format) {
+          // 如果format非正则，非函数，则使用默认的时间格式化方法进行操作
+          return uni.$u.timeFormat(text, format);
+        }
+        // 如果没有设置format，则设置为默认的时间格式化形式
+        return uni.$u.timeFormat(text, 'yyyy-mm-dd');
+      }if (mode === 'phone') {
+        // 判断是否合法的手机号
+        // !uni.$u.test.mobile(text) && uni.$u.error('手机号模式下，text参数需要为手机号码格式')
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }if (format === 'encrypt') {
+          // 如果format为encrypt，则将手机号进行星号加密处理
+          return "".concat(text.substr(0, 3), "****").concat(text.substr(7));
+        }
+        return text;
+      }if (mode === 'name') {
+        // 判断是否合法的字符粗
+        !(typeof text === 'string') && uni.$u.error('姓名模式下，text参数需要为字符串格式');
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }if (format === 'encrypt') {
+          // 如果format为encrypt，则将姓名进行星号加密处理
+          return this.formatName(text);
+        }
+        return text;
+      }if (mode === 'link') {
+        // 判断是否合法的字符粗
+        !uni.$u.test.url(href) && uni.$u.error('超链接模式下，href参数需要为URL格式');
+        return text;
+      }
+      return text;
+    } },
+
+  methods: {
+    // 默认的姓名脱敏规则
+    formatName: function formatName(name) {
+      var value = '';
+      if (name.length === 2) {
+        value = name.substr(0, 1) + '*';
+      } else if (name.length > 2) {
+        var char = '';
+        for (var i = 0, len = name.length - 2; i < len; i++) {
+          char += '*';
+        }
+        value = name.substr(0, 1) + char + name.substr(-1, 1);
+      } else {
+        value = name;
+      }
+      return value;
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 395 */
+/*!******************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/libs/mixin/button.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    lang: String,
+    sessionFrom: String,
+    sendMessageTitle: String,
+    sendMessagePath: String,
+    sendMessageImg: String,
+    showMessageCard: Boolean,
+    appParameter: String,
+    formType: String,
+    openType: String } };exports.default = _default;
+
+/***/ }),
+/* 396 */
+/*!********************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/libs/mixin/openType.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    openType: String },
+
+  methods: {
+    onGetUserInfo: function onGetUserInfo(event) {
+      this.$emit('getuserinfo', event.detail);
+    },
+    onContact: function onContact(event) {
+      this.$emit('contact', event.detail);
+    },
+    onGetPhoneNumber: function onGetPhoneNumber(event) {
+      this.$emit('getphonenumber', event.detail);
+    },
+    onError: function onError(event) {
+      this.$emit('error', event.detail);
+    },
+    onLaunchApp: function onLaunchApp(event) {
+      this.$emit('launchapp', event.detail);
+    },
+    onOpenSetting: function onOpenSetting(event) {
+      this.$emit('opensetting', event.detail);
+    } } };exports.default = _default;
+
+/***/ }),
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */
+/*!************************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-link/props.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.link.color },
+
+    // 字体大小，单位px
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.link.fontSize },
+
+    // 是否显示下划线
+    underLine: {
+      type: Boolean,
+      default: uni.$u.props.link.underLine },
+
+    // 要跳转的链接
+    href: {
+      type: String,
+      default: uni.$u.props.link.href },
+
+    // 小程序中复制到粘贴板的提示语
+    mpTips: {
+      type: String,
+      default: uni.$u.props.link.mpTips },
+
+    // 下划线颜色
+    lineColor: {
+      type: String,
+      default: uni.$u.props.link.lineColor },
+
+    // 超链接的问题，不使用slot形式传入，是因为nvue下无法修改颜色
+    text: {
+      type: String,
+      default: uni.$u.props.link.text } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */
+/*!***********************************************************************!*\
+  !*** C:/Users/ASUS/Desktop/ruixin/uview-ui/components/u-row/props.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 给col添加间距，左右边距各占一半
+    gutter: {
+      type: [String, Number],
+      default: uni.$u.props.row.gutter },
+
+    // 水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
+    justify: {
+      type: String,
+      default: uni.$u.props.row.justify },
+
+    // 垂直对齐方式，可选值为top、center、bottom
+    align: {
+      type: String,
+      default: uni.$u.props.row.align } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 ]]);

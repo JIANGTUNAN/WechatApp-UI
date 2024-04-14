@@ -1,8 +1,9 @@
 {
-  "navigationBarTitleText": "detail",
+  "navigationBarTitleText": "店铺详情",
   "usingComponents": {
-    "u-number-box": "/uview-ui/components/u-number-box/u-number-box",
-    "u-badge": "/uview-ui/components/u-badge/u-badge",
-    "u-icon": "/uview-ui/components/u-icon/u-icon"
+    "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "swiper-list": "/pages/component/swiperList"
   }
 }

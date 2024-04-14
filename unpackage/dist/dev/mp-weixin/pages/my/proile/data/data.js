@@ -130,7 +130,34 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -139,11 +166,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    var currentDate = this.getDate({
+      format: true });
 
-
+    return {
+      userFeedbackHidden: true, // 默认隐藏
+      feedbackContent: '樱桃多多' // 用户反馈内容
+    };
   },
-  methods: {} };exports.default = _default;
+  onShow: function onShow() {
+    uni.getStorageSync('netname');
+  },
+  methods: {
+    showDiv: function showDiv() {// 显示输入弹出框
+      this.userFeedbackHidden = false;
+    },
+    hideDiv: function hideDiv() {// 隐藏输入弹出框
+      this.userFeedbackHidden = true;
+    },
+    submitFeedback: function submitFeedback() {// 提交反馈
+      var _this = this;
+      // 提交反馈内容
+      console.log(_this.feedbackContent);
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

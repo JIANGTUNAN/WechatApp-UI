@@ -132,7 +132,7 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 	.search {
 		height: 100vh;
 		background-color: #f7f7f7;

@@ -8,7 +8,13 @@ if (process.env.NODE_ENV === "production") {
 	//开发环境
 	baseUrl = "http://www.kangliuyong.com:10002"
 }
-const request = function(options) {
+const request = function(options = {}) {
+	const {
+		url,
+		data = {},
+		method,
+		useToken = true
+	} = options;
 	//拼接接口
 	options.url = baseUrl + options.url
 	// 判断 data 是否 是对象类型
@@ -29,9 +35,11 @@ const request = function(options) {
 	if (token) {
 		options.data.tokenString = token
 	} else {
-		uni.navigateTo({
-			url:"../login/login"
-		})
+		if (!useToken) {
+			uni.navigateTo({
+				url: "../login/login"
+			})
+		}
 	}
 
 	return uni.request(options)

@@ -1,64 +1,42 @@
 <template>
 	<view class="meau" ref="document" :style="{height:`${height}`}">
 		<view class="map">
-				<image src="/static/images/map.jpg" mode="widthFix" alt="">
+			<image src="/static/images/map.jpg" mode="widthFix" alt="">
 		</view>
 		<view class="search">
 			<view class="search-box">
-				<uni-icons type="search" color="#0c34ba" size="16"></uni-icons>
-				<input type="search" value="" class="ipt"  placeholder="请输入商品名" />
-			</view>
-
-		</view>
-		<view class="classfig-hidden">
-
-			<view class="classfig">
-
-				<view class="classfig-box" v-for="(v,i) in typeList" @click="typeLight(i,v)">
-					<view class="img-box">
-						<image :src="i===count?typeList[0].iconArray[i].selectIcon:typeList[0].iconArray[i].icon"
-							mode="widthFix" class="img"></image>
-					</view>
-					<view class="classfig-name" :class="{active:i===count}">
-						{{v.typeDesc}}
-					</view>
-				</view>
+				<u-icon color="#0c34ba" :size='18' name='search'></u-icon>
+				<input type="search" v-model="searchQuery" clearable class="ipt" placeholder="请输入店铺名" />
 			</view>
 		</view>
-		<view class="product" v-for="(item,index) in productList" :key="index" @click="getDetail(item)">
-			<view class="product-left">
+		<view class="list">
+			<view class="store" v-for="(item,index) in filteredList" :key="index" @click="getDetail(item)">
 				<view class="img-box">
 					<image :src="item.largeImg" mode="widthFix center" class="img"></image>
 				</view>
-				<view class="product-text">
-					<view class="product-name">
-						{{item.name}}
+				<view class="store-text">
+					<view class="store-name">
+						<text class="content">{{item.name}}</text>
+						<u-icon v-if="item.star" color='#0c34ba' name="checkmark-circle"></u-icon>
 					</view>
-					<view class="product-enname">
-						{{item.enname}}
+					<view class="store-introduce">
+						{{item.enname}} 
 					</view>
 				</view>
-
-			</view>
-			<view class="product-right">
-				￥{{item.price}}
 			</view>
 
 		</view>
-
 	</view>
 </template>
 
 <script>
 	export default {
 		data() {
-
 			return {
 				isHot: {
 					typeDesc: "推荐",
 					id: 0
 				},
-				typeList: [],
 				iconList: [{
 						title: "isHot",
 						icon: "https://z3.ax1x.com/2021/09/10/hXiRbD.gif",
@@ -86,107 +64,163 @@
 					},
 				],
 				count: 0,
-				productList: [],
+				searchQuery: '',
+				storeList: [],
 				height: ""
 			}
 		},
 		methods: {
-			getType() {
-				uni.request({
-					url: "http://www.kangliuyong.com:10002/type",
-					data: {
-						appkey: "U2FsdGVkX19WSQ59Cg+Fj9jNZPxRC5y0xB1iV06BeNA="
-					},
-					success: (res) => {
-
-							this.typeList = res.data.result
-							this.typeList.unshift(this.isHot)
-							this.typeList[0].iconArray = this.iconList;
-						}
-				})
-			},
 			typeLight(index, item) {
 				if (this.count === index) {
 					return;
 				}
 				this.count = index
-				this.productType(index, item)
-				this.height=100+'vh'
-				
-			},
-			productType(index, item) {
-				uni.showLoading({
-					title:"正在加载",
-					mask:true
-				})
-				let key = ""
-				let value = ""
-				if (index === 0) {
-					key = 'isHot',
-						value = 1
-				} else {
-					key = 'type',
-						value = item.type
-				}
-				uni.request({
-					url: "http://www.kangliuyong.com:10002/typeProducts",
-					data: {
-						appkey: "U2FsdGVkX19WSQ59Cg+Fj9jNZPxRC5y0xB1iV06BeNA=",
-						key: key,
-						value: value
-					},
-					success: (res) => {
+				this.storeType(index, item)
+				this.height = 100 + 'vh'
 
-						if (res.statusCode === 200) {
-							uni.hideLoading()
-							this.productList = res.data.result
-							console.log(this.productList)
-						}
+			},
+			init() {
+				this.storeList = [{
+						"id": 7,
+						"pid": "latte004",
+						"type": "coffee",
+						"name": "焦糖拿铁 融入醇香焦糖风味，香甜温暖，令人沉醉",
+						"price": "28.00",
+						"desc": "拿铁中融入醇香焦糖风味，香甜温暖，令人沉醉。\n主要原材料：浓缩咖啡，牛奶，焦糖风味糖浆。\n图片仅供参考，请以实物为准。建议送达后尽快饮用。",
+						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0384_02p.jpg",
+						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0384_02.jpg",
+						"typeDesc": "拿铁",
+						"isHot": 1,
+						"enname": "CaramelLatteCaramelLatteCaramel LatteCaramel LatteCaramel LatteCaramel LatteCaramel LatteCaramel LatteCaramel Latte",
+						"createdAt": "2021-01-24T10:53:54.000Z",
+						"updatedAt": "2021-01-24T10:53:54.000Z"
+					},
+					{
+						"id": 8,
+						"pid": "latte005",
+						"type": "coffee",
+						"name": "榛果拿铁",
+						"price": "28.00",
+						"desc": "榛果爱好者的选择！香甜榛果风味与咖啡牛奶融合，诠释另一种新鲜风味。\n主要原材料：浓缩咖啡，牛奶，榛子风味糖浆。\n图片仅供参考，请以实物为准。建议送达后尽快饮用。",
+						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0385_02p.jpg",
+						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0385_02.jpg",
+						"typeDesc": "拿铁",
+						"isHot": 1,
+						"enname": "Hazelnut Latte",
+						"createdAt": "2021-01-24T10:53:54.000Z",
+						"updatedAt": "2021-01-24T10:53:54.000Z"
+					},
+					{
+						"id": 13,
+						"pid": "coffee006",
+						"type": "coffee",
+						"name": "奥瑞白",
+						"price": "28.00",
+						"desc": "咖啡与牛奶黄金配比，奶香四溢，口感香醇。\n主要原材料：浓缩咖啡，牛奶。\n图片仅供参考，请以实物为准。建议送达后尽快饮用。",
+						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0390_02p.jpg",
+						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0390_02.jpg",
+						"typeDesc": "咖啡",
+						"isHot": 1,
+						"enname": "Flat White",
+						"createdAt": "2021-01-24T10:53:54.000Z",
+						"updatedAt": "2021-01-24T10:53:54.000Z"
+					},
+					{
+						"id": 15,
+						"pid": "latte006",
+						"type": "latte",
+						"name": "黑糖啵啵拿铁",
+						"price": "28.00",
+						"desc": "独特的黑糖风味拿铁，佐以Q嫩儒糯的黑糖口味珍珠，创造出层次丰富的美妙口感。（建议搅拌后饮用）\n主要原材料：浓缩咖啡，黑糖味珍珠，纯牛奶，黑糖味调味糖浆，原味调味糖浆，可选择添加搅打奶油（含香草风味糖浆）\n图片仅供参考，请以实物为准，建议取餐后尽快饮用。",
+						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0392_02p.jpg",
+						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0392_02.jpg",
+						"typeDesc": "拿铁",
+						"isHot": 1,
+						"enname": "Brown Sugar Bubble Latte",
+						"createdAt": "2021-01-24T10:53:54.000Z",
+						"updatedAt": "2021-01-24T10:53:54.000Z"
+					},
+					{
+						"id": 18,
+						"pid": "fruit_tea001",
+						"type": "fruit_tea",
+						"name": "满杯百香果",
+						"price": "17.00",
+						"desc": "清新又浓郁的百香果香气，混合清新茉莉茶香，加上椰果与寒天的爽滑Q弹，满杯椰香果香茶香。\n主要原材料：椰果、百香果汁、原味寒天晶球、茉莉绿茶、原味调味糖浆。\n图片仅供参考，请以实物为准，建议取餐后尽快饮用。",
+						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/d001_small.png",
+						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/d001.png",
+						"typeDesc": "水果茶",
+						"isHot": 1,
+						"enname": "Passion Fruit & Coconut Jelly Jasmine Tea",
+						"createdAt": "2021-01-24T10:53:54.000Z",
+						"updatedAt": "2021-01-24T10:53:54.000Z"
+					},
+					{
+						"id": 20,
+						"pid": "fruit_tea005",
+						"type": "fruit_tea",
+						"name": "椰子冰",
+						"price": "20.00",
+						"desc": "【不含咖啡】优选纯牛奶为底，融进满满椰香，又加入柔和香草风味，椰子控必喝。\n主要原料：纯牛奶、椰子风味粉、香草风味糖浆、原味冰沙粉、冰块、稀奶油（含香草风味糖浆）。\n图片及包装仅供参考，请以实物为准。温馨提示：瑞纳冰系列产品形态为冰沙，无法进行少冰去冰操作，请您谅解。建议送达后尽快饮用。到店饮用口感更佳。 ",
+						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/h001_small.png",
+						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/h001.png",
+						"typeDesc": "水果茶",
+						"isHot": 1,
+						"enname": "Coconut ice",
+						"createdAt": "2021-01-24T10:53:54.000Z",
+						"updatedAt": "2021-01-24T10:53:54.000Z"
 					}
-				})
-				
+				]
 			},
-				
+
 			addHeight() {
-				this.height = this.productList.length * 21;
-					
-				if(this.height<100){
-					this.height=100+"vh"
-				}else{
-					this.height=this.height+"vh"
+				this.height = this.storeList.length * 21;
+
+				if (this.height < 100) {
+					this.height = 100 + "vh"
+				} else {
+					this.height = this.height + "vh"
 				}
-				
-			
+
+
 			},
-			getDetail(item){
+			getDetail(item) {
 				uni.navigateTo({
-					url:`../detail/detail?pid=${item.pid}`
+					url: `../detail/detail?pid=${item.pid}`
 				})
 			}
 
 		},
 		onLoad() {
-			this.getType()
-			this.productType(0)
+			this.init()
 		},
 		onReachBottom() {
 			this.addHeight()
-		}
+		},
+		computed: {
+			filteredList() {
+				return this.storeList.filter(item => {
+					return item.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+				});
+			},
+		},
 
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 	.meau {
-		height: 100vh;
-		background-color: #f7f7f7;
-		
-		.map{
-			image{
+
+		.map {
+			image {
 				width: 100%;
 			}
 		}
+
 		.search {
+			position: sticky;
+			top: 0;
+			z-index: 100;
 			height: 100rpx;
 			padding: 0 60rpx;
 			background-color: #fff;
@@ -210,71 +244,25 @@
 
 		}
 
-		.classfig-hidden {
-			position: sticky;
-			top: 0;
-			width: 100%;
-			height: 150rpx;
-			margin: 30rpx 0;
-			padding-top: 20rpx;
-			background-color: #fff;
-			overflow: hidden;
-			z-index: 99;
-
-
-
-			.classfig {
-				height: 180rpx;
-				display: flex;
-				overflow-x: auto;
-
-				.classfig-box {
-					width: 190rpx;
-					height: 130rpx;
-					flex-shrink: 0;
-					display: flex;
-					justify-content: center;
-					flex-wrap: wrap;
-
-					.img-box {
-						width: 80rpx;
-						height: 80rpx;
-
-						.img {
-							width: 100%;
-						}
-					}
-
-					.classfig-name {
-						width: 120rpx;
-						font-size: 32rpx;
-						text-align: center;
-					}
-				}
-			}
-		}
-
 		.active {
 			color: #0c34ba;
 		}
 
-		.product {
-			border-radius: 20rpx;
-			padding: 20rpx;
-			margin: 0 30rpx;
-			margin-bottom: 30rpx;
-			background-color: #fff;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
+		.list {
+			background-color: #f7f7f7;
+			padding: 30rpx;
 
-			.product-left {
+			.store {
+				border-radius: 20rpx;
+				padding: 20rpx;
+				margin-bottom: 30rpx;
+				background-color: #fff;
 				display: flex;
-				align-items: center;
 
 				.img-box {
-					width: 150rpx;
-					height: 150rpx;
+					flex: 0 0 180rpx;
+					width: 180rpx;
+					height: 180rpx;
 
 					.img {
 						width: 100%;
@@ -282,27 +270,34 @@
 					}
 				}
 
-				.product-text {
-					height: 100rpx;
+				.store-text {
+					flex: 1;
+					min-width: 0;
 					color: #787878;
 					margin-left: 30rpx;
 
-					.product-name {
-						width: 300rpx;
+					.store-name {
+						display: flex;
+						color: #000;
+						font-weight: 600;
 						height: 45rpx;
-						padding-bottom: 20rpx;
+						padding-bottom: 0rpx;
 						text-align: start;
-						display: -webkit-box;
-						white-space: pre-wrap;
-						overflow: hidden;
-						text-overflow: ellipsis;
-						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 1;
+						max-width: 90%;
+
+						.content {
+							display: block;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							margin-right: 20rpx;
+							// flex: 1;
+						}
 					}
 
-					.product-enname {
+					.store-introduce {
 						width: 300rpx;
-						height: 45rpx;
+						height: 120rpx;
 						font-size: 30rpx;
 						text-align: start;
 						display: -webkit-box;
@@ -310,16 +305,9 @@
 						overflow: hidden;
 						text-overflow: ellipsis;
 						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 1;
+						-webkit-line-clamp: 3;
 					}
 				}
-
-			}
-
-			.product-right {
-				color: #0c34ba;
-				font-size: 32rpx;
-				font-weight: bold;
 			}
 		}
 	}

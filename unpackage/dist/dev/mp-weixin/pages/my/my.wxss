@@ -24,8 +24,12 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+uni-page-body {
+  height: 100%;
+}
 .my {
   background-color: #f7f7f7;
+  height: 100%;
 }
 .my .nav-bg .img-box {
   height: 400rpx;
@@ -49,19 +53,18 @@
   display: flex;
 }
 .my .popup .popup-title .popup-left {
-  flex: 3;
+  flex: 30%;
 }
 .my .popup .popup-title .popup-left .img-box {
   width: 150rpx;
   height: 150rpx;
-  border-radius: 50%;
   overflow: hidden;
 }
 .my .popup .popup-title .popup-left .img-box .img {
   width: 100%;
 }
 .my .popup .popup-title .popup-right {
-  flex: 7;
+  flex: 70%;
 }
 .my .popup .popup-title .popup-right .popup-right-title {
   color: #0c34ba;
