@@ -1,3 +1,5 @@
+import cellGroup from "uview-ui/libs/config/props/cellGroup";
+
 //公共路径
 var baseUrl = "http://www.kangliuyong.com:10002";
 
@@ -37,7 +39,7 @@ const request = function(options = {}) {
 	} else {
 		if (!useToken) {
 			uni.navigateTo({
-				url: "../login/login"
+				url: "/pages/login/login"
 			})
 		}
 	}

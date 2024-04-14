@@ -194,6 +194,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -227,6 +228,20 @@ var _default =
     },
     onLoad: function onLoad() {
       this.getFindeMy();
+    },
+    toLogin: function toLogin() {
+      uni.navigateTo({
+        url: '/pages/login/login' });
+
+    },
+    logout: function logout() {
+      var _self = this;
+      uni.removeStorage({
+        key: 'token',
+        success: function success() {
+          _self.toLogin();
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

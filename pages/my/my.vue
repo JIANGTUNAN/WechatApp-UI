@@ -6,6 +6,7 @@
 			</view>
 		</view>
 		<view class="popup">
+			<button @click="toLogin">登录</button><button @click="logout">退出登录</button>
 			<view class="popup-title">
 				<view class="popup-left">
 					<view class="img-box">
@@ -67,6 +68,20 @@
 			},
 			onLoad() {
 				this.getFindeMy()
+			},
+			toLogin(){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+			},
+			logout(){
+				const _self=this;
+				uni.removeStorage({
+					key:'token',
+					success() {
+						_self.toLogin();
+					}
+				})
 			}
 		},
 	}

@@ -98,7 +98,7 @@ var components
 try {
   components = {
     uPopup: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 268))
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 318))
     }
   }
 } catch (e) {
@@ -253,22 +253,34 @@ var _request = _interopRequireDefault(__webpack_require__(/*! @/request/request.
 //
 //
 var _default = { data: function data() {return { show: false, form: { number: '', password: "", nickName: "" } };}, methods: { submit: function submit() {var _this = this;uni.login({ provider: 'weixin', success: function success(loginRes) {var code = loginRes.code; // 获取用户信息
-          uni.getUserInfo({ provider: 'weixin', success: function success(infoRes) {var _infoRes$userInfo = infoRes.userInfo,avatarUrl = _infoRes$userInfo.avatarUrl,nickName = _infoRes$userInfo.nickName;console.log('infoRes', infoRes, loginRes);(0, _request.default)({ url: "/app/login", method: 'POST', useToken: false, data: { code: code, avatarUrl: avatarUrl, nickName: nickName } }).then(function (res) {uni.showToast({ title: JSON.stringify(infoRes),
-                  icon: 'success',
-                  duration: 2000,
-                  success: function success() {
-                    uni.switchTab({
-                      url: '/pages/map/map' });
+          uni.getUserInfo({ provider: 'weixin', success: function success(infoRes) {var _infoRes$userInfo = infoRes.userInfo,avatarUrl = _infoRes$userInfo.avatarUrl,nickName = _infoRes$userInfo.nickName;console.log('infoRes', infoRes, loginRes);(0, _request.default)({ url: "/app/login", method: 'POST', useToken: false, data: { code: code, avatarUrl: avatarUrl, nickName: nickName } }).then(function (res) {if (res.code == '200') {uni.showToast({
+                    title: JSON.stringify(infoRes),
+                    icon: 'success',
+                    duration: 2000,
+                    success: function success() {
+                      uni.switchTab({
+                        url: '/pages/map/map' });
 
-                    uni.setStorage({ //存入Storage
-                      key: 'userInfo',
-                      data: {
-                        avatarUrl: avatarUrl,
-                        nickName: nickName } });
+                      uni.setStorage({ //存入Storage
+                        key: 'userInfo',
+                        data: {
+                          avatarUrl: avatarUrl,
+                          nickName: nickName } });
 
 
-                  } });
+                      uni.setStorage({ //存入Storage
+                        key: 'token',
+                        data: res.token });
 
+                    } });
+
+                } else {
+                  uni.showToast({
+                    duration: 2000,
+                    title: '登录失败',
+                    icon: "error" });
+
+                }
 
               });
             } });

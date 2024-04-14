@@ -18378,7 +18378,9 @@ platform;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //公共路径
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _cellGroup = _interopRequireDefault(__webpack_require__(/*! uview-ui/libs/config/props/cellGroup */ 56));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+//公共路径
 var baseUrl = "http://www.kangliuyong.com:10002";
 
 if (false) {} else {
@@ -18414,7 +18416,7 @@ var request = function request() {var options = arguments.length > 0 && argument
   } else {
     if (!useToken) {
       uni.navigateTo({
-        url: "../login/login" });
+        url: "/pages/login/login" });
 
     }
   }

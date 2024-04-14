@@ -75,23 +75,35 @@
 										nickName
 									}
 								}).then(res => {
-									uni.showToast({
-										title: JSON.stringify(infoRes),
-										icon: 'success',
-										duration: 2000,
-										success: function() {
-											uni.switchTab({
-												url: '/pages/map/map'
-											});
-											uni.setStorage({ //存入Storage
-												key: 'userInfo', 
-												data: {
-													avatarUrl,
-													nickName
-												}
-											})
-										}
-									})
+									if (res.code == '200') {
+										uni.showToast({
+											title: JSON.stringify(infoRes),
+											icon: 'success',
+											duration: 2000,
+											success: function() {
+												uni.switchTab({
+													url: '/pages/map/map'
+												});
+												uni.setStorage({ //存入Storage
+													key: 'userInfo',
+													data: {
+														avatarUrl,
+														nickName
+													}
+												});
+												uni.setStorage({ //存入Storage
+													key: 'token',
+													data: res.token
+												})
+											}
+										})
+									} else {
+										uni.showToast({
+											duration: 2000,
+											title: '登录失败',
+											icon: "error"
+										})
+									}
 
 								})
 							}
