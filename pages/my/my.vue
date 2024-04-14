@@ -6,7 +6,11 @@
 			</view>
 		</view>
 		<view class="popup">
-			<button @click="toLogin">登录</button><button @click="logout">退出登录</button>
+			
+			<button @click="toLogin">登录</button>
+			<button @click="checkLogin">验证登录</button>
+			<button @click="logout">退出登录</button>
+			
 			<view class="popup-title">
 				<view class="popup-left">
 					<view class="img-box">
@@ -36,6 +40,9 @@
 </template>
 
 <script>
+	
+	import request from "@/request/request.js"
+	
 	export default {
 		data() {
 			return {
@@ -74,14 +81,33 @@
 					url:'/pages/login/login'
 				})
 			},
+			
+			checkLogin(){
+				request({
+					url: "/system/getUser",
+					method: 'GET'
+				}).then(res => {
+					console.log(res)
+				})
+			},
+			
 			logout(){
 				const _self=this;
-				uni.removeStorage({
-					key:'token',
-					success() {
-						_self.toLogin();
-					}
+				
+				request({
+					url: "/app/logout",
+					method: 'GET'
+				}).then(res => {
+					console.log(res)
 				})
+				
+				// 先注释测试后台的 token注销功能是否生效
+				// uni.removeStorage({
+				// 	key:'token',
+				// 	success() {
+				// 		_self.toLogin();
+				// 	}
+				// })
 			}
 		},
 	}

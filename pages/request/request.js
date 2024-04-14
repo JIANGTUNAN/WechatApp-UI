@@ -1,11 +1,13 @@
 //公共路径
-var baseUrl = 'http://www.kangliuyong.com:10002';
+var baseUrl = 'http://localhost:8080';
+
 if (process.env.NODE_ENV==='production'){
 	//开发环境
 	baseUrl = 'http://www.kangliuyong.com:10002'+'/washer'
 }else{
-	baseUrl = 'http://www.kangliuyong.com:10002'
+	baseUrl = 'http://localhost:8080'
 }
+
 const request = function(options){
 	//拼接接口
 	options.url=baseUrl+options.url

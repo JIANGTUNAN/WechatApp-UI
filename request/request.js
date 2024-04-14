@@ -8,13 +8,14 @@ if (process.env.NODE_ENV === "production") {
 	baseUrl = "http://www.kangliuyong.com:10002" + '/washer'
 } else {
 	//开发环境
-	baseUrl = "http://www.kangliuyong.com:10002"
+	baseUrl = "https://ngrok.tolan.top:5082"
 }
 const request = function(options = {}) {
 	const {
 		url,
 		data = {},
 		method,
+		header = {},
 		useToken = true
 	} = options;
 	//拼接接口
@@ -35,6 +36,11 @@ const request = function(options = {}) {
 	const token = uni.getStorageSync('token')
 	//判断token 是否有值
 	if (token) {
+		if(options.header){
+			options.header['Authorization'] = token
+		}else{
+			options.header = {'Authorization':token}
+		}
 		options.data.tokenString = token
 	} else {
 		if (!useToken) {

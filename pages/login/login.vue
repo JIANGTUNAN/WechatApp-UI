@@ -75,7 +75,11 @@
 										nickName
 									}
 								}).then(res => {
-									if (res.code == '200') {
+									
+									console.log(res);
+									
+									if (res[1].data.code == '200') {
+										
 										uni.showToast({
 											title: JSON.stringify(infoRes),
 											icon: 'success',
@@ -93,7 +97,7 @@
 												});
 												uni.setStorage({ //存入Storage
 													key: 'token',
-													data: res.token
+													data: res[1].data.data.token
 												})
 											}
 										})
