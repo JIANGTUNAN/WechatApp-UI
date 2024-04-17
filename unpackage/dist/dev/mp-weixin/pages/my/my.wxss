@@ -50,6 +50,7 @@ uni-page-body {
 }
 .my .popup .popup-title {
   margin-bottom: 75rpx;
+  padding: 0 20rpx;
   display: flex;
 }
 .my .popup .popup-title .popup-left {

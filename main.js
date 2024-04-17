@@ -7,7 +7,7 @@ import request from "./request/request.js"
 
 Vue.config.productionTip = false;
 // 将requset 挂载到vue原型上
-Vue.prototype.$myRequest=request
+Vue.prototype.$request=request
 
 Vue.use(uView)
 

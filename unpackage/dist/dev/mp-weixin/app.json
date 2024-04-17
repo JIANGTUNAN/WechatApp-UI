@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/map/map",
     "pages/my/my",
     "pages/comment/index",
     "pages/comment/reply",
     "pages/detail/detail",
     "pages/search/search",
-    "pages/login/login",
     "pages/my/proile/data/data",
     "pages/my/proile/address/address",
     "pages/my/proile/collection/collection",

@@ -87,8 +87,8 @@
 	.item-name {
 		display: table;
 		width: 100%;
-		font-size: 32rpx;
-		line-height: 32rpx;
+		font-size: 28rpx;
+		line-height: 28rpx;
 		font-weight: bold;
 		white-space: pre-wrap;
 		color: #333333;

@@ -6,7 +6,7 @@
 					<image src="../../static/images/coffee.jpg" mode="widthFix" class="img"></image>
 				</view>
 				<view class="nav-txet">
-					集咖 <text style="font-size: 14rpx;">CoffeeCup</text>
+					畅享咖
 				</view>
 			</view>
 		</view>
@@ -37,7 +37,10 @@
 </template>
 
 <script>
-	import request from "@/request/request.js"
+	import {
+		login,
+		getUser
+	} from "@/api/api.js";
 	export default {
 		data() {
 			return {
@@ -47,11 +50,23 @@
 					password: "",
 					nickName: ""
 				},
+				loading: true,
 			}
 		},
 		methods: {
+			intoApp() {
+				uni.switchTab({
+					url: '/pages/map/map'
+				});
+			},
 			submit() {
 				let _this = this;
+
+				uni.showToast({
+					title: '登录失败',
+					mask: true,
+					duration: 1000
+				})
 				uni.login({
 					provider: 'weixin',
 					success: function(loginRes) {
@@ -65,29 +80,17 @@
 									nickName
 								} = infoRes.userInfo;
 								console.log('infoRes', infoRes, loginRes);
-								request({
-									url: "/app/login",
-									method: 'POST',
-									useToken: false,
-									data: {
-										code,
-										avatarUrl,
-										nickName
-									}
+								login({
+									code,
+									avatarUrl,
+									nickName
 								}).then(res => {
-									
-									console.log(res);
-									
-									if (res[1].data.code == '200') {
-										
+									if (res.code == '200') {
 										uni.showToast({
 											title: JSON.stringify(infoRes),
 											icon: 'success',
 											duration: 2000,
 											success: function() {
-												uni.switchTab({
-													url: '/pages/map/map'
-												});
 												uni.setStorage({ //存入Storage
 													key: 'userInfo',
 													data: {
@@ -97,15 +100,18 @@
 												});
 												uni.setStorage({ //存入Storage
 													key: 'token',
-													data: res[1].data.data.token
+													data: res.data
+														.token
 												})
+												_this.intoApp()
+
 											}
 										})
 									} else {
 										uni.showToast({
-											duration: 2000,
 											title: '登录失败',
-											icon: "error"
+											mask: true,
+											duration: 1000
 										})
 									}
 
@@ -116,14 +122,27 @@
 				});
 			},
 		},
-		onLoad(options) {
+		async onLoad(options) {
 			const hideTip = options.hideTip || false;
+			const token = uni.getStorageSync('token');
+			return this.intoApp();
+			let isLogin = false;
+			if (token && token != '' && !hideTip) {
+				await getUser().then((res) => {
+					if (res.code == 200) {
+						isLogin = true;
+						this.intoApp()
+					}
+				})
+			}
+			if (isLogin) return;
 			if (!hideTip) uni.showToast({
 				title: "请先登录",
 				icon: "none",
 				mask: true,
 				duration: 1000
 			})
+			this.loading = false;
 		},
 	}
 </script>

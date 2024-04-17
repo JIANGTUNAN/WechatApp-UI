@@ -6,31 +6,31 @@
 			</view>
 		</view>
 		<view class="popup">
-			
+
 			<button @click="toLogin">登录</button>
 			<button @click="checkLogin">验证登录</button>
 			<button @click="logout">退出登录</button>
-			
+
 			<view class="popup-title">
 				<view class="popup-left">
 					<view class="img-box">
-						<u-avatar :src="avatarUrl" :size='75'></u-avatar>
+						<u-avatar :src="userInfo.avatarUrl" :size='75'></u-avatar>
 					</view>
 				</view>
 				<view class="popup-right">
 					<view class="popup-right-title">
-						{{nickName}}
+						{{userInfo.nickName}}
 					</view>
 					<view class="popup-right-desc">
-						个人简介
+						{{userInfo.remark||'个人简介' }}
 					</view>
 				</view>
 			</view>
-			<view class="popup-item" v-for="(item,index) in list" :key="item.id" @click="goToPages(item,index)">
+			<view class="popup-item" v-for="(item,index) in list" :key="index" @click="goToPages(item)">
 				<view class="popup-item-left">
 					{{item.title}}
 				</view>
-				<view class="popup-item-right">
+				<view class="popup-item-right" v-if="!item.button">
 					<u-icon name="arrow-right" color="#999" size="18"></u-icon>
 				</view>
 			</view>
@@ -40,17 +40,20 @@
 </template>
 
 <script>
-	
-	import request from "@/request/request.js"
-	
+	import {
+		getUser,
+		logout
+	} from '@/api/api.js';
 	export default {
 		data() {
 			return {
 				myList: "",
-				avatarUrl:'',
-				nickName:'Allen',
+				userInfo: {
+					avatarUrl: '用户',
+					nickName: 'Allen',
+				},
 				list: [{
-						title: "个人资料",
+						title: "个人资料修改",
 						url: "./proile/data/data",
 						id: 1
 					},
@@ -59,64 +62,75 @@
 						url: "./proile/collection/collection",
 						id: 2
 					},
+					{
+						title: "退出登录",
+						id: 3,
+						method: 'logout',
+						button: true
+					},
 				]
 			}
 		},
 
 		methods: {
 			getFindeMy() {
-				const data = uni.getStorageSync('userInfo');
-				console.log(111, data);
+				// getUser('1')
+				const userInfo = uni.getStorageSync('userInfo');
+				this.userInfo = userInfo
 			},
-			goToPages(item, index) {
-				uni.navigateTo({
-					url: item.url
-				})
+			goToPages(item) {
+				if (item.method && [item.method] in this) {
+					const fn = this[item.method]
+					if (typeof fn == 'function') {
+						console.log(6323);
+						return fn();
+					}
+				}
+				if (item.url) {
+					uni.navigateTo({
+						url: item.url
+					})
+				}
 			},
 			onLoad() {
 				this.getFindeMy()
 			},
-			toLogin(){
+			toLogin() {
 				uni.navigateTo({
-					url:'/pages/login/login'
+					url: '/pages/login/login'
 				})
 			},
-			
-			checkLogin(){
-				request({
+
+			checkLogin() {
+				this.$request({
 					url: "/system/getUser",
 					method: 'GET'
 				}).then(res => {
 					console.log(res)
 				})
 			},
-			
-			logout(){
-				const _self=this;
-				
-				request({
-					url: "/app/logout",
-					method: 'GET'
-				}).then(res => {
-					console.log(res)
+
+			logout() {
+				const _self = this;
+				logout().then(() => {
+					uni.removeStorage({
+						key: 'token',
+						success() {
+							_self.toLogin();
+						}
+					})
 				})
-				
-				// 先注释测试后台的 token注销功能是否生效
-				// uni.removeStorage({
-				// 	key:'token',
-				// 	success() {
-				// 		_self.toLogin();
-				// 	}
-				// })
+
 			}
 		},
 	}
 </script>
 
 <style lang="scss">
-	uni-page-body{
+	uni-page-body {
 		height: 100%;
 	}
+
 	.my {
 		background-color: #f7f7f7;
 		height: 100%;
@@ -141,8 +155,10 @@
 			margin: 0 30rpx;
 			overflow: hidden;
 			background-image: linear-gradient(rgba(255, 255, 255, 0.3), #fff, #fff);
+
 			.popup-title {
 				margin-bottom: 75rpx;
+				padding: 0 20rpx;
 				display: flex;
 
 				.popup-left {
@@ -161,6 +177,7 @@
 
 				.popup-right {
 					flex: 70%;
+
 					.popup-right-title {
 						color: #0c34ba;
 						font-size: 40rpx;

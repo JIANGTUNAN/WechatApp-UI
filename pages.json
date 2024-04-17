@@ -4,6 +4,18 @@
 	},
 	"pages": [
 		{
+			"path": "pages/login/login",
+			"style": {
+				//小程序 去顶
+				"navigationStyle": "custom",
+				// h5  去顶
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		},
+		{
 			"path": "pages/map/map",
 			"style": {
 				// "navigationBarTitleText": "map",
@@ -42,18 +54,6 @@
 		},
 		{
 			"path": "pages/search/search",
-			"style": {
-				//小程序 去顶
-				"navigationStyle": "custom",
-				// h5  去顶
-				"app-plus": {
-					"titleNView": false
-				}
-			}
-
-		},
-		{
-			"path": "pages/login/login",
 			"style": {
 				//小程序 去顶
 				"navigationStyle": "custom",

@@ -2,7 +2,7 @@
 	<view class="detail">
 		<!-- 商品大图 -->
 		<view class="nav-img">
-			<u-swiper :loading="loading" :height="250" :list="list" keyName='image' indicator
+			<u-swiper :loading="loading" :height="250" :list="storeInfo.imageList"  indicator
 				:indicatorStyle="{bottom:'66rpx'}">
 			</u-swiper>
 		</view>
@@ -10,7 +10,7 @@
 			<view class="section-title">
 				<view class="section-title-left">
 					<view class="name">
-						{{detailArray.name}}
+						{{storeInfo.name}}
 					</view>
 					<view class="online">
 						营业时间：8:00-17:00
@@ -23,7 +23,7 @@
 			</view>
 			<view class="profile">
 				<text>店铺简介：</text>
-				<text style="color: #000;">{{detailArray.enname}}</text>
+				<text style="color: #000;">{{storeInfo.simpleTitle}}</text>
 			</view>
 			<view class="product">
 				<text class="title">推荐商品：</text>
@@ -45,7 +45,7 @@
 
 							</view>
 							<view class="desc">
-								<view v-for="(i,idx) in (selectedProduct.descr||'').split('\n')" :key="idx">
+								<view v-for="(i,idx) in (selectedProduct.desc||'').split('\n')" :key="idx">
 									{{i}}
 								</view>
 							</view>
@@ -91,6 +91,7 @@
 
 <script>
 	import SwiperList from '@/pages/component/swiperList.vue';
+	import {getStoreById,getProduct,getComment} from '@/api/api.js'
 	export default {
 		data() {
 			return {
@@ -113,10 +114,10 @@
 					id: 1,
 					name: '招牌美式',
 					simpleTitle: '喝美式咖啡，剪美式寸头，品自由人生',
-					descr: '💫 唤醒味蕾的醇香之旅\n每一滴纯正美式咖啡， 都蕴藏着丰富的咖啡香气与独特的口感。 从精心挑选的优质咖啡豆开始， 经过严格烘焙与精细研磨， 只为给您带来一杯浓郁而不失细腻的美式咖啡。\n🌱 精选咖啡豆， 品质至上\n我们坚持选用来自全球优质咖啡产区的顶级咖啡豆， 确保每一粒豆子都饱含着大自然的馈赠。 通过独特的烘焙工艺， 我们保留了咖啡豆的原始风味， 让每一杯美式咖啡都散发出迷人的香气。\n💧 精细研磨， 口感丝滑\n采用先进的研磨技术， 我们确保咖啡粉的细腻度恰到好处， 让每一滴咖啡都能充分释放出浓郁的味道。 在热水的冲泡下， 咖啡粉与水完美融合， 呈现出一杯口感丝滑、 回甘无穷的美式咖啡。\n☕ 随时随地， 尽享咖啡时光\n无论您是在办公室、 家中还是户外， 只要有一杯纯正美式咖啡在手， 就能轻松享受美好的咖啡时光。 它不仅能提神醒脑， 还能让您在忙碌的生活中找到片刻的宁静与放松。\n🎁 礼盒装更优惠， 分享美好时光我们还特别推出了美式咖啡礼盒装， 让您在享受美味的同时， 还能与亲朋好友分享这份来自咖啡的美好时光。 现在下单， 还有更多优惠等着您哦！',
-					src: 'https://th.bing.com/th/id/OIP.Bu_aiW-BSGDi0O9RpL67mgHaHa?w=169&h=180&c=7&r=0&o=5&pid=1.7'
+					desc: '💫 唤醒味蕾的醇香之旅\n每一滴纯正美式咖啡， 都蕴藏着丰富的咖啡香气与独特的口感。 从精心挑选的优质咖啡豆开始， 经过严格烘焙与精细研磨， 只为给您带来一杯浓郁而不失细腻的美式咖啡。\n🌱 精选咖啡豆， 品质至上\n我们坚持选用来自全球优质咖啡产区的顶级咖啡豆， 确保每一粒豆子都饱含着大自然的馈赠。 通过独特的烘焙工艺， 我们保留了咖啡豆的原始风味， 让每一杯美式咖啡都散发出迷人的香气。\n💧 精细研磨， 口感丝滑\n采用先进的研磨技术， 我们确保咖啡粉的细腻度恰到好处， 让每一滴咖啡都能充分释放出浓郁的味道。 在热水的冲泡下， 咖啡粉与水完美融合， 呈现出一杯口感丝滑、 回甘无穷的美式咖啡。\n☕ 随时随地， 尽享咖啡时光\n无论您是在办公室、 家中还是户外， 只要有一杯纯正美式咖啡在手， 就能轻松享受美好的咖啡时光。 它不仅能提神醒脑， 还能让您在忙碌的生活中找到片刻的宁静与放松。\n🎁 礼盒装更优惠， 分享美好时光我们还特别推出了美式咖啡礼盒装， 让您在享受美味的同时， 还能与亲朋好友分享这份来自咖啡的美好时光。 现在下单， 还有更多优惠等着您哦！',
+					src: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.cGEcABHEjqpBysEsqTGQzAHaHa?w=204&h=204&c=7&r=0&o=5&pid=1.7'
 				})),
-				detailArray: "",
+				storeInfo: {},
 				selectedProduct: {},
 				value: 1,
 				pid: "",
@@ -158,42 +159,25 @@
 					url:'/pages/comment/index',
 				})
 			},
-			getDetailType(pids) {
-				uni.request({
-					url: "http://www.kangliuyong.com:10002/productDetail",
-					data: {
-						appkey: "U2FsdGVkX19WSQ59Cg+Fj9jNZPxRC5y0xB1iV06BeNA=",
-						pid: pids
-					},
-
-					success: (res) => {
-						// console.log(res)
-						let typeList = ['cream', 'milk', 'sugar', 'tem']
-						let arr = []
-						res.data.result[0].desc = res.data.result[0].desc.split(/\n/)
-						let data = res.data.result[0]
-						typeList.forEach(v => {
-							if (!data[v]) {
-								return
-							}
-							let captian = {
-								title: data[`${v}_desc`],
-								activeIndex: 0,
-								arr: []
-							}
-							let teamArray = data[v].split('/')
-							teamArray.forEach(item => {
-								let team = {
-									title: item
-								}
-								captian.arr.push(team)
-							})
-							arr.push(captian)
-						})
-						data.arr = arr
-						this.detailArray = data
-
-					}
+			getStoreInfo(id){
+				getStoreById(id).then(res=>{
+					this.storeInfo=res.data;
+					console.log('111store',res)
+				})
+			},
+			getProducts(id){
+				getProduct(id).then(res=>{
+					this.productList=res.data
+				})
+			},
+			getComments(id){
+				getComment({
+					storeId:id,
+					pageNum:1,
+					pageSize:1
+				}).then(res=>{
+					console.log('comment',res.data);
+					// this.comment=comment
 				})
 			},
 			add(i, item) {
@@ -222,12 +206,14 @@
 			},
 		},
 		onLoad(option) {
-			this.pid = option.pid
+			const id = option.storeId;
 			setTimeout(() => {
 				this.loading = false;
 			}, 2000)
-			this.getDetailType(option.pid)
-
+			console.log(523,id);
+			this.getStoreInfo(id);
+			this.getProducts(id);
+			this.getComments(id);
 		}
 
 	}

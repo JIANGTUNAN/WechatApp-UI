@@ -12,7 +12,7 @@
 		<view class="list">
 			<view class="store" v-for="(item,index) in filteredList" :key="index" @click="getDetail(item)">
 				<view class="img-box">
-					<image :src="item.largeImg" mode="widthFix center" class="img"></image>
+					<image :src="item.smallImg" mode="widthFix center" class="img"></image>
 				</view>
 				<view class="store-text">
 					<view class="store-name">
@@ -20,7 +20,7 @@
 						<u-icon v-if="item.star" color='#0c34ba' name="checkmark-circle"></u-icon>
 					</view>
 					<view class="store-introduce">
-						{{item.enname}} 
+						{{item.simpleTitle}}
 					</view>
 				</view>
 			</view>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+	import {getStore,getStarStore} from "@/api/api.js"
 	export default {
 		data() {
 			return {
@@ -37,32 +38,6 @@
 					typeDesc: "推荐",
 					id: 0
 				},
-				iconList: [{
-						title: "isHot",
-						icon: "https://z3.ax1x.com/2021/09/10/hXiRbD.gif",
-						selectIcon: "https://z3.ax1x.com/2021/09/10/hXFei9.gif"
-					},
-					{
-						title: "latte",
-						icon: "https://z3.ax1x.com/2021/09/10/hXFtJA.gif",
-						selectIcon: "https://z3.ax1x.com/2021/09/10/hXFdQP.gif"
-					},
-					{
-						title: "coffee",
-						icon: "https://z3.ax1x.com/2021/09/10/hXFwsf.gif",
-						selectIcon: "https://z3.ax1x.com/2021/09/10/hXFrdg.gif"
-					},
-					{
-						title: "rena_ice",
-						icon: "https://z3.ax1x.com/2021/09/10/hXFcJs.gif",
-						selectIcon: "https://z3.ax1x.com/2021/09/10/hXF7FJ.gif"
-					},
-					{
-						title: "fruit_tea",
-						icon: "https://z3.ax1x.com/2021/09/10/hXFOQx.gif",
-						selectIcon: "https://z3.ax1x.com/2021/09/10/hXFzwD.png"
-					},
-				],
 				count: 0,
 				searchQuery: '',
 				storeList: [],
@@ -80,20 +55,37 @@
 
 			},
 			init() {
+				if(getApp().globalData.starStoreList==null){
+					getStarStore('6').then(res=>{
+						getApp().globalData.starStoreList=res.data;
+						console.log('starList',res.data);
+					})
+				}
+				getStore().then(res=>{
+					this.storeList=res.data;
+				})
+				return;
 				this.storeList = [{
-						"id": 7,
-						"pid": "latte004",
-						"type": "coffee",
-						"name": "焦糖拿铁 融入醇香焦糖风味，香甜温暖，令人沉醉",
-						"price": "28.00",
-						"desc": "拿铁中融入醇香焦糖风味，香甜温暖，令人沉醉。\n主要原材料：浓缩咖啡，牛奶，焦糖风味糖浆。\n图片仅供参考，请以实物为准。建议送达后尽快饮用。",
-						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0384_02p.jpg",
-						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0384_02.jpg",
-						"typeDesc": "拿铁",
-						"isHot": 1,
-						"enname": "CaramelLatteCaramelLatteCaramel LatteCaramel LatteCaramel LatteCaramel LatteCaramel LatteCaramel LatteCaramel Latte",
-						"createdAt": "2021-01-24T10:53:54.000Z",
-						"updatedAt": "2021-01-24T10:53:54.000Z"
+						id: "店铺id，int类型",
+						name: "店铺名",
+						pid: "latte004",
+						simpleTitle: "店铺简介",
+						desc: "店铺介绍(用\n分行，如'1\n2\n3会显示3行')",
+						smallImg: "店铺图片小图(在列表展示时显示)，推荐比例1:1",
+						online: "营业时间，如09:00",
+						offline:"打烊时间，如17:00",
+						star: "是否已收藏,用0|1或false|true",
+						imageList: ["轮播图片链接列表，最少需要一张,店铺详情里展示，推荐宽:高=3:2",/*more*/],
+						productList: [{
+							id: "产品id，int类型",
+							storeId:"产品所属店铺id",
+							name: '产品名称',
+							simpleTitle: '产品简介',
+							desc: '产品介绍(用\n分行，如"1\n2\n3会显示3行")',
+							src: '产品图片展示图，推荐比例1:1',
+							sort:'排序(同时作为商品排行)',
+							type:1// 商品类型，请同时提供类型字典，如:[{label:'拿铁',value:1},{""}],
+						},/*more*/],
 					},
 					{
 						"id": 8,
@@ -175,27 +167,24 @@
 
 			addHeight() {
 				this.height = this.storeList.length * 21;
-
 				if (this.height < 100) {
-					this.height = 100 + "vh"
+					this.height = 100 + "vh";
 				} else {
-					this.height = this.height + "vh"
+					this.height = this.height + "vh";
 				}
-
-
 			},
 			getDetail(item) {
 				uni.navigateTo({
-					url: `../detail/detail?pid=${item.pid}`
+					url: `../detail/detail?storeId=${item.id}`
 				})
 			}
 
 		},
 		onLoad() {
-			this.init()
+			this.init();
 		},
 		onReachBottom() {
-			this.addHeight()
+			this.addHeight();
 		},
 		computed: {
 			filteredList() {

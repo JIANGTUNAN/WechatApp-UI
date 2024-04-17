@@ -18,7 +18,7 @@ var _request = _interopRequireDefault(__webpack_require__(/*! ./request/request.
 wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 _vue.default.config.productionTip = false;
 // 将requset 挂载到vue原型上
-_vue.default.prototype.$myRequest = _request.default;
+_vue.default.prototype.$request = _request.default;
 
 _vue.default.use(_uviewUi.default);
 
@@ -100,6 +100,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
+  // 全局变量
+  globalData: {
+    // 打卡店铺信息
+    starStoreList: null },
+
   onLaunch: function onLaunch() {
     console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！');
     console.log('App Launch');
