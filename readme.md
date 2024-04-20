@@ -35,12 +35,12 @@
 
 1. 安装配置好所需软件及插件
 2. 在manifest.json的微信小程序配置->微信小程序AppID中填入你的AppID
-```manifest.json
-...
-"mp-weixin" : {
-    "appid" : "你的AppID",
+```
+{
+	"mp-weixin" : {
+		"appid" : "你的AppID",
+	}
 }
-...
 ```
 3. 在HbuilderX的菜单中，运行->运行到小程序模拟器->微信开发者工具
 
