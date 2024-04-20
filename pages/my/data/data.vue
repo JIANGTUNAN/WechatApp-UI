@@ -104,6 +104,7 @@
 					uni.stopPullDownRefresh();
 			},
 			chooseImg() {
+				const {userId} =this;
 				uni.chooseImage({
 					count: 1,
 					sourceType: ['album'],

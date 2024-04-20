@@ -1,7 +1,7 @@
 <template>
 	<view class="collection">
 		<view class="list">
-			<view class="store" v-for="(store,index) in list" :key="index" @click="getDetail(store)">
+			<view class="store" v-for="(store,index) in list" :key="index" @click="getDetail(store.id)">
 				<view class="img-box">
 					<image :src="store.smallImg" mode="widthFix center" class="img"></image>
 				</view>
@@ -44,9 +44,10 @@
 				uni.stopPullDownRefresh();
 
 			},
-			getDetail(item) {
+			getDetail(id) {
+				console.log(id);
 				uni.navigateTo({
-					url: `../detail/detail?storeId=${item.id}`
+					url: `../../detail/detail?storeId=${id}`
 				})
 			}
 		},

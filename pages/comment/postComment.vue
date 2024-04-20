@@ -1,5 +1,5 @@
 <template>
-	<u-popup closeable :show="visable" @close="visable=false">
+	<u-popup closeable :show="visable" @close="close">
 		<view class="popup">
 			<view class="title">
 				{{replyId?'回复评论':'发布评论'}}
@@ -62,6 +62,11 @@
 				this.replyId = id || null;
 				this.visable = true;
 			},
+			close(){
+				this.visable = false;
+				this.files=[];
+				this.commentContent='';
+			},
 
 			addImage() {
 				uni.chooseImage({
@@ -96,7 +101,7 @@
 							})
 						}
 						_self.loading = false;
-						_self.visable = false;
+						_self.close();
 						_self.$emit('finish')
 				}
 				_self.files.forEach((path, index) => {
