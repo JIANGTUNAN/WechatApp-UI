@@ -14,7 +14,7 @@
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "wx376e58abd9d81e28",
-  "projectname": "rx",
+  "projectname": "mp-coffee",
   "condition": {
     "search": {
       "current": -1,

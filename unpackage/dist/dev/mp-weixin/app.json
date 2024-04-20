@@ -6,14 +6,11 @@
     "pages/comment/index",
     "pages/comment/reply",
     "pages/detail/detail",
-    "pages/search/search",
-    "pages/my/proile/data/data",
-    "pages/my/proile/address/address",
-    "pages/my/proile/collection/collection",
-    "pages/my/proile/order/order",
-    "pages/proil/mys/mys",
+    "pages/my/data/data",
+    "pages/my/collection/collection",
     "pages/wiki/wiki",
-    "pages/wiki/bean_detail"
+    "pages/wiki/bean_detail",
+    "pages/productList/productList"
   ],
   "subPackages": [],
   "window": {

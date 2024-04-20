@@ -14,11 +14,14 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 6));
 var _uviewUi = _interopRequireDefault(__webpack_require__(/*! uview-ui */ 12));
 
-var _request = _interopRequireDefault(__webpack_require__(/*! ./request/request.js */ 136));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} // @ts-ignore
+var _request = _interopRequireDefault(__webpack_require__(/*! ./request/request.js */ 136));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./util/index.js */ 484));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} // @ts-ignore
 wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 _vue.default.config.productionTip = false;
 // 将requset 挂载到vue原型上
 _vue.default.prototype.$request = _request.default;
+// 挂载全局公用函数方法
+_vue.default.prototype.$util = _index.default;
 
 _vue.default.use(_uviewUi.default);
 
@@ -98,12 +101,23 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _request = __webpack_require__(/*! @/request/request.js */ 136);var _default =
 {
   // 全局变量
-  globalData: {
-    // 打卡店铺信息
-    starStoreList: null },
+  globalData: {},
+
+  methods: {
+    getAvatarUrl: function getAvatarUrl() {
+      var userInfo = uni.getStorageSync('userInfo');
+      var avatarUrl,s = userInfo.sysHeadPic,w = userInfo.wxHeadPic;
+      if (s.indexOf('default_avatar.png') > 0) {
+        avatarUrl = w;
+      } else {
+        avatarUrl = _request.baseUrl + s;
+      }
+      return avatarUrl;
+    } },
 
   onLaunch: function onLaunch() {
     console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！');
@@ -115,6 +129,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   onHide: function onHide() {
     console.log('App Hide');
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 9 */

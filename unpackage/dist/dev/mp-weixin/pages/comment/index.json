@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "全部评论",
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "u-icon": "/uview-ui/components/u-icon/u-icon"
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "post-comment": "/pages/comment/postComment"
   }
 }
