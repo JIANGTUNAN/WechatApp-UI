@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import list from './bean_wiki.js';
+	import list from '@/util/bean_wiki.js';
 	export default {
 		data() {
 			return {
@@ -43,11 +43,12 @@
 					url:'/pages/wiki/bean_detail?index='+index,
 				})
 			},
+			init(){
+				
+			},
 		},
 		onLoad() {
 		},
-		onReachBottom() {
-		}
 	}
 </script>
 

@@ -1,9 +1,20 @@
 <script>
+	import {baseUrl} from '@/request/request.js';
 	export default {
 		// 全局变量
-		globalData:{
-			// 打卡店铺信息
-			starStoreList:null,
+		globalData: {
+		},
+		methods: {
+			getAvatarUrl() {
+				const userInfo = uni.getStorageSync('userInfo');
+				let avatarUrl,{sysHeadPic:s,wxHeadPic:w}=userInfo;
+				if (s.indexOf('default_avatar.png')>0) {
+					avatarUrl = w
+				} else {
+					avatarUrl = baseUrl + s;
+				}
+				return avatarUrl;
+			}
 		},
 		onLaunch: function() {
 			console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')

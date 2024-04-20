@@ -61,12 +61,6 @@
 			},
 			submit() {
 				let _this = this;
-
-				uni.showToast({
-					title: '登录失败',
-					mask: true,
-					duration: 1000
-				})
 				uni.login({
 					provider: 'weixin',
 					success: function(loginRes) {
@@ -79,7 +73,7 @@
 									avatarUrl,
 									nickName
 								} = infoRes.userInfo;
-								console.log('infoRes', infoRes, loginRes);
+								// console.log('Info', infoRes, loginRes);
 								login({
 									code,
 									avatarUrl,
@@ -91,12 +85,10 @@
 											icon: 'success',
 											duration: 2000,
 											success: function() {
+												const userInfo=res.data.sysUser;
 												uni.setStorage({ //存入Storage
 													key: 'userInfo',
-													data: {
-														avatarUrl,
-														nickName
-													}
+													data: userInfo
 												});
 												uni.setStorage({ //存入Storage
 													key: 'token',
@@ -111,7 +103,8 @@
 										uni.showToast({
 											title: '登录失败',
 											mask: true,
-											duration: 1000
+											duration: 1000,
+											icon:'none'
 										})
 									}
 
@@ -125,7 +118,6 @@
 		async onLoad(options) {
 			const hideTip = options.hideTip || false;
 			const token = uni.getStorageSync('token');
-			return this.intoApp();
 			let isLogin = false;
 			if (token && token != '' && !hideTip) {
 				await getUser().then((res) => {

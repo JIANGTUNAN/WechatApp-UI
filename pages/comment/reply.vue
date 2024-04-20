@@ -3,226 +3,266 @@
 		<view class="comment">
 			<view class="top">
 				<view class="left">
-					<view class="heart-photo"><image :src="comment.url" mode=""></image></view>
+					<view class="heart-photo">
+						<image :src="baseUrl+comment.userAvatarUrl" mode=""></image>
+					</view>
 					<view class="user-info">
-						<view class="name">{{ comment.name }}</view>
-						<view class="date">06-25 13:58</view>
+						<view class="name">{{ comment.userNickName }}</view>
+						<view class="date">{{$util.formatDate(comment.publishTime)}}
+						</view>
+						<view class="reply-btn" @click="handleReply(item.commentId)">
+							回复
+						</view>
 					</view>
 				</view>
-				<view class="right" :class="{ highlight: comment.isLike }">
-					{{ comment.likeNum }}
-					<u-icon v-if="!comment.isLike" name="thumb-up" class="like" color="#9a9a9a" :size="30" @click="getLike"></u-icon>
-					<u-icon v-if="comment.isLike" name="thumb-up-fill" class="like" :size="30" @click="getLike"></u-icon>
-				</view>
 			</view>
-			<view class="content">{{ comment.contentText }}</view>
+			<view class="images" v-for="(src,idx) in comment.imageList" :key="idx">
+				<image :src="baseUrl+src" mode="widthFix"></image>
+			</view>
+			<view class="content">{{ comment.commentContent }}</view>
 		</view>
 		<view class="all-reply">
-			<view class="all-reply-top">全部回复（{{ comment.allReply }}）</view>
-			<view class="item" v-for="(item, index) in commentList" :key="index">
+			<view class="all-reply-top">全部回复（{{ comment.replyNum }}）</view>
+			<view class="item" v-for="(item, index) in comment.secondLevelComments" :key="index">
 				<view class="comment">
 					<view class="top">
 						<view class="left">
-							<view class="heart-photo"><image :src="item.url" mode=""></image></view>
+							<view class="heart-photo">
+								<image :src="baseUrl+item.cuserAvatarUrl" mode=""></image>
+							</view>
 							<view class="user-info">
-								<view class="name">{{ item.name }}</view>
-								<view class="date">{{ item.date }}</view>
+								<view class="name">{{ item.cuserNickName }}
+									<view class="replay-person" v-if="item.ruserId">
+										回复
+										<view class="ruser-info">
+											<image :src="baseUrl+item.ruserAvatarUrl" mode=""></image>
+											{{ item.ruserNickName }}
+										</view>
+									</view>
+								</view>
+								<view class="date">{{ $util.formatDate(item.publishTime) }}
+
+								</view>
+								<view class="reply-btn" @click="handleReply(item.commentId)">
+									回复
+								</view>
 							</view>
 						</view>
-						<view class="right"  :class="{ highlight: item.isLike }">
-							<view class="num">{{ item.likeNum }}</view>
-							<u-icon v-if="!item.isLike" name="thumb-up" class="like" :size="30" color="#9a9a9a" @click="getLike(index)"></u-icon>
-							<u-icon v-if="item.isLike" name="thumb-up-fill" class="like" :size="30" @click="getLike(index)"></u-icon>
-						</view>
 					</view>
-					<view class="reply" v-if="item.reply">
-						<view class="username">{{ item.reply.name }}</view>
-						<view class="text">{{ item.reply.contentStr }}</view>
+					<view class="images" v-for="(src,idx) in item.imageList" :key="idx">
+						<image :src="baseUrl+src" mode="widthFix"></image>
 					</view>
-					<view class="content">{{ item.contentText }}</view>
+					<view class="content">{{ item.commentContent }}</view>
 				</view>
 			</view>
 		</view>
+		<PostComment ref='postComment' :storeId="storeId"  @finish="()=>init(commentId)" />
+
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			commentList: [],
-			comment: ''
-		};
-	},
-	onLoad() {
-		this.getReply();
-	},
-	methods: {
-		// 点赞
-		getLike(index) {
-			if (index === 0 || index > 0) {
-				this.commentList[index].isLike = !this.commentList[index].isLike;
-				if (this.commentList[index].isLike == true) {
-					this.commentList[index].likeNum++;
-				} else {
-					this.commentList[index].likeNum--;
-				}
-			} else {
-				if (this.comment.isLike == true) {
-					this.comment.isLike = !this.comment.isLike;
-					this.comment.likeNum--;
-				} else {
-					this.comment.isLike = !this.comment.isLike;
-					this.comment.likeNum++;
-				}
-			}
-		},
+	import PostComment from "@/pages/comment/postComment.vue"
+	import {
+		getCommentDetail
+	} from "@/api/api.js";
+	import {
+		baseUrl
+	} from "@/request/request.js";
 
-		// 回复列表
-		getReply() {
-			this.comment = {
-				id: 1,
-				name: '叶轻眉',
-				date: '12-25 18:58',
-				contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-				url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-				allReply: 12,
-				likeNum: 33,
-				isLikes: false
+	export default {
+		data() {
+			return {
+				commentList: [],
+				comment: '',
+				commentId: null,
+				baseUrl,
+				storeId:null,
 			};
-			this.commentList = [
-				{
-					name: '新八几',
-					date: '12-25 18:58',
-					contentText: '不要乱打广告啊喂！虽然是真的超好用',
-					url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-					likeNum: 33,
-					isLike: false,
-					reply: {
-						name: 'uview',
-						contentStr: 'uview是基于uniapp的一个UI框架，代码优美简洁，宇宙超级无敌彩虹旋转好用，用它！'
-					}
-				},
-				{
-					name: '叶轻眉1',
-					date: '01-25 13:58',
-					url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-					contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-					allReply: 0,
-					likeNum: 11,
-					isLike: false,
-					reply: {
-						name: '粘粘',
-						contentStr: '今天吃什么，明天吃什么，晚上吃什么，我只是一只小猫咪为什么要烦恼这么多'
-					}
-				},
-				{
-					name: '叶轻眉2',
-					date: '03-25 13:58',
-					contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-					allReply: 0,
-					likeNum: 21,
-					url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-					isLike: false,
-					allReply: 2,
-					reply: {
-						name: '豆包',
-						contentStr: '想吃冰糖葫芦粘豆包，但没钱5555.........'
-					}
-				},
-				{
-					name: '叶轻眉3',
-					date: '06-20 13:58',
-					contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-					allReply: 0,
-					likeNum: 150,
-					url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-					isLike: false
+		},
+		components: {
+			PostComment
+		},
+		onLoad(options) {
+			const id = options.commentId;
+			this.storeId = options.storeId;
+			this.init(id)
+		},
+		onPullDownRefresh() {
+			this.init(this.commentId);
+		},
+		methods: {
+			init(id) {
+				if (id) {
+					this.commentId = id;
+					this.getReply(id);
+				} else {
+					uni.showToast({
+						title: '请求出错',
+						icon: "none",
+					});
+					setTimeout(() => {
+						uni.navigateBack();
+					}, 800)
 				}
-			];
+				uni.stopPullDownRefresh()
+			},
+			// 回复列表
+			getReply(id) {
+				getCommentDetail(id).then(res => {
+					this.comment = res.data;
+				})
+			},
+			handleReply(id){
+				this.$refs.postComment.open(id);
+			}
 		}
-	}
-};
+	};
 </script>
 
 <style lang="scss" scoped>
-page {
-	background-color: #f2f2f2;
-}
-.comment {
-	padding: 30rpx;
-	font-size: 32rpx;
-	background-color: #ffffff;
-	.top {
-		display: flex;
-		justify-content: space-between;
+	page {
+		background-color: #f2f2f2;
 	}
-	.left {
-		display: flex;
-		.heart-photo {
+
+	.comment {
+		padding: 30rpx;
+		font-size: 32rpx;
+		background-color: #ffffff;
+		position: relative;
+
+		.images {
+			$w: 180rpx;
+
+			display: inline-block;
+			margin-right: 20rpx;
+			margin-bottom: 10rpx;
+
 			image {
-				width: 64rpx;
-				height: 64rpx;
-				border-radius: 50%;
-				background-color: #f2f2f2;
+				width: $w;
+				height: $w;
 			}
+
+
 		}
-		.user-info {
-			margin-left: 10rpx;
-			.name {
-				color: #5677fc;
-				font-size: 28rpx;
-				margin-bottom: 4rpx;
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 10rpx;
+		}
+
+		.left {
+			display: flex;
+
+			.heart-photo {
+				image {
+					width: 64rpx;
+					height: 64rpx;
+					border-radius: 50%;
+					background-color: #f2f2f2;
+				}
 			}
-			.date {
-				font-size: 20rpx;
-				color: $u-light-color;
+
+			.user-info {
+				width: 100%;
+				margin-left: 10rpx;
+
+				.name {
+					color: #5677fc;
+					font-size: 28rpx;
+					margin-bottom: 4rpx;
+
+					.replay-person {
+						display: inline-block;
+						color: #999;
+						font-size: 24rpx;
+						margin-left: 20rpx;
+
+						.ruser-info {
+							margin-left: 20rpx;
+							color: #5677fc;
+
+							image {
+								width: 30rpx;
+								height: 30rpx;
+								border-radius: 50%;
+							}
+
+							display: inline-block;
+						}
+					}
+				}
+
+				.date {
+					width: 100%;
+					font-size: 20rpx;
+					color: $u-light-color;
+
+				}
+
+				.reply-btn {
+					position: absolute;
+					right: 60rpx;
+					top: 40rpx;
+					color: #5677fc;
+				}
 			}
+
 		}
-	}
-	.right {
-		display: flex;
-		font-size: 20rpx;
-		align-items: center;
-		color: #9a9a9a;
-		.like {
-			margin-left: 6rpx;
-		}
-		.num{
-			font-size: 26rpx;
+
+		.right {
+			display: flex;
+			font-size: 20rpx;
+			align-items: center;
 			color: #9a9a9a;
+
+			.like {
+				margin-left: 6rpx;
+			}
+
+			.num {
+				font-size: 26rpx;
+				color: #9a9a9a;
+			}
 		}
-	}
-	.highlight {
-		color: #5677fc;
-		.num{
+
+		.highlight {
 			color: #5677fc;
+
+			.num {
+				color: #5677fc;
+			}
 		}
 	}
-}
-.all-reply {
-	margin-top: 10rpx;
-	padding-top: 20rpx;
-	background-color: #ffffff;
-	.all-reply-top {
-		margin-left: 20rpx;
-		padding-left: 20rpx;
-		border-left: solid 4rpx #5677fc;
-		font-size: 30rpx;
-		font-weight: bold;
-	}
-	.item {
-		border-bottom: solid 2rpx $u-border-color;
-	}
-	.reply {
-		padding: 20rpx;
-		background-color: rgb(242, 242, 242);
-		border-radius: 12rpx;
-		margin: 10rpx 0;
-		.username {
-			font-size: 24rpx;
-			color: #7a7a7a;
+
+	.all-reply {
+		margin-top: 10rpx;
+		padding-top: 20rpx;
+		background-color: #ffffff;
+
+		.all-reply-top {
+			margin-left: 20rpx;
+			padding-left: 20rpx;
+			border-left: solid 4rpx #5677fc;
+			font-size: 30rpx;
+			font-weight: bold;
+		}
+
+		.item {
+			border-bottom: solid 2rpx $u-border-color;
+		}
+
+		.reply {
+			padding: 20rpx;
+			background-color: rgb(242, 242, 242);
+			border-radius: 12rpx;
+			margin: 10rpx 0;
+
+			.username {
+				font-size: 24rpx;
+				color: #7a7a7a;
+			}
 		}
 	}
-}
 </style>

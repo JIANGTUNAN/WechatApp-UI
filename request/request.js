@@ -1,5 +1,7 @@
 // 请求地址
-var baseUrl = "https://ngrok.tolan.top:5082";
+// export var baseUrl = "http://frps.tolan.top:7080";
+// export var baseUrl = "http://47.236.14.30:7080"
+export var baseUrl = "https://coffee.frps.tolan.top"
 // 请求函数封装
 const request = function(options = {}) {
 	// 请求地址拼接
@@ -7,13 +9,13 @@ const request = function(options = {}) {
 	// 获取 登录 token
 	const token = uni.getStorageSync('token')
 	// 配置post请求默认参数格式
-	if (options.method == "POST" && !options.header['Content-Type']) {
+	if (options.method == "POST" && !options?.header?. ['Content-Type']) {
 		options.header = {
 			'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
 		}
 	}
 	//判断token 是否有值
-	if (token) {
+	if (token||true) {
 		// 有token,加上token
 		options.header = {
 			...options.header,
@@ -32,12 +34,19 @@ const request = function(options = {}) {
 	return uni.request(options).then(res => {
 		// 小程序返回偶尔会变成[null,res]的情况，加上验证以防万一
 		if (Array.isArray(res)) {
+			if (res[0]?.errMsg.includes("request:fail")) {
+
+				return uni.showToast({
+					icon: "error",
+					title: '请求失败'
+				})
+			}
 			res = res[1];
 		}
 		// 拿自定义的返回体
-		res = res?.data||res;
+		res = res?.data || res;
 		// 检查返回码
-		if (res.code === 401) {// token过期
+		if (res.code === 401) { // token过期
 			uni.removeStorageSync('token') // 清空 token
 			uni.showToast({
 				icon: "none",

@@ -6,11 +6,6 @@
 			</view>
 		</view>
 		<view class="popup">
-
-			<button @click="toLogin">登录</button>
-			<button @click="checkLogin">验证登录</button>
-			<button @click="logout">退出登录</button>
-
 			<view class="popup-title">
 				<view class="popup-left">
 					<view class="img-box">
@@ -19,10 +14,10 @@
 				</view>
 				<view class="popup-right">
 					<view class="popup-right-title">
-						{{userInfo.nickName}}
+						{{userInfo.sysNickName||userInfo.wxNickName}}
 					</view>
 					<view class="popup-right-desc">
-						{{userInfo.remark||'个人简介' }}
+						{{userInfo.introduction||'个人简介' }}
 					</view>
 				</view>
 			</view>
@@ -48,18 +43,15 @@
 		data() {
 			return {
 				myList: "",
-				userInfo: {
-					avatarUrl: '用户',
-					nickName: 'Allen',
-				},
+				userInfo: {},
 				list: [{
 						title: "个人资料修改",
-						url: "./proile/data/data",
+						url: "./data/data",
 						id: 1
 					},
 					{
 						title: "我的集咖",
-						url: "./proile/collection/collection",
+						url: "./collection/collection",
 						id: 2
 					},
 					{
@@ -71,18 +63,23 @@
 				]
 			}
 		},
-
+		onLoad() {
+			this.getFindeMy();
+		},
+		onPullDownRefresh() {
+			this.getFindeMy();
+		},
 		methods: {
 			getFindeMy() {
-				// getUser('1')
-				const userInfo = uni.getStorageSync('userInfo');
+				let userInfo = uni.getStorageSync('userInfo');
+				userInfo.avatarUrl = getApp().getAvatarUrl();
 				this.userInfo = userInfo
+				uni.stopPullDownRefresh();
 			},
 			goToPages(item) {
 				if (item.method && [item.method] in this) {
 					const fn = this[item.method]
 					if (typeof fn == 'function') {
-						console.log(6323);
 						return fn();
 					}
 				}
@@ -92,27 +89,18 @@
 					})
 				}
 			},
-			onLoad() {
-				this.getFindeMy()
-			},
 			toLogin() {
 				uni.navigateTo({
 					url: '/pages/login/login'
 				})
 			},
 
-			checkLogin() {
-				this.$request({
-					url: "/system/getUser",
-					method: 'GET'
-				}).then(res => {
-					console.log(res)
-				})
-			},
-
 			logout() {
 				const _self = this;
 				logout().then(() => {
+					uni.removeStorage({
+						key: 'userInfo'
+					})
 					uni.removeStorage({
 						key: 'token',
 						success() {

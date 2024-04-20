@@ -20,7 +20,7 @@
 						<u-icon v-if="item.star" color='#0c34ba' name="checkmark-circle"></u-icon>
 					</view>
 					<view class="store-introduce">
-						{{item.simpleTitle}}
+						{{item.desc}}
 					</view>
 				</view>
 			</view>
@@ -30,7 +30,10 @@
 </template>
 
 <script>
-	import {getStore,getStarStore} from "@/api/api.js"
+	import {
+		getStore,
+		getStarStore
+	} from "@/api/api.js"
 	export default {
 		data() {
 			return {
@@ -55,114 +58,9 @@
 
 			},
 			init() {
-				if(getApp().globalData.starStoreList==null){
-					getStarStore('6').then(res=>{
-						getApp().globalData.starStoreList=res.data;
-						console.log('starList',res.data);
-					})
-				}
-				getStore().then(res=>{
-					this.storeList=res.data;
+				getStore().then(res => {
+					this.storeList = res.data;
 				})
-				return;
-				this.storeList = [{
-						id: "店铺id，int类型",
-						name: "店铺名",
-						pid: "latte004",
-						simpleTitle: "店铺简介",
-						desc: "店铺介绍(用\n分行，如'1\n2\n3会显示3行')",
-						smallImg: "店铺图片小图(在列表展示时显示)，推荐比例1:1",
-						online: "营业时间，如09:00",
-						offline:"打烊时间，如17:00",
-						star: "是否已收藏,用0|1或false|true",
-						imageList: ["轮播图片链接列表，最少需要一张,店铺详情里展示，推荐宽:高=3:2",/*more*/],
-						productList: [{
-							id: "产品id，int类型",
-							storeId:"产品所属店铺id",
-							name: '产品名称',
-							simpleTitle: '产品简介',
-							desc: '产品介绍(用\n分行，如"1\n2\n3会显示3行")',
-							src: '产品图片展示图，推荐比例1:1',
-							sort:'排序(同时作为商品排行)',
-							type:1// 商品类型，请同时提供类型字典，如:[{label:'拿铁',value:1},{""}],
-						},/*more*/],
-					},
-					{
-						"id": 8,
-						"pid": "latte005",
-						"type": "coffee",
-						"name": "榛果拿铁",
-						"price": "28.00",
-						"desc": "榛果爱好者的选择！香甜榛果风味与咖啡牛奶融合，诠释另一种新鲜风味。\n主要原材料：浓缩咖啡，牛奶，榛子风味糖浆。\n图片仅供参考，请以实物为准。建议送达后尽快饮用。",
-						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0385_02p.jpg",
-						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0385_02.jpg",
-						"typeDesc": "拿铁",
-						"isHot": 1,
-						"enname": "Hazelnut Latte",
-						"createdAt": "2021-01-24T10:53:54.000Z",
-						"updatedAt": "2021-01-24T10:53:54.000Z"
-					},
-					{
-						"id": 13,
-						"pid": "coffee006",
-						"type": "coffee",
-						"name": "奥瑞白",
-						"price": "28.00",
-						"desc": "咖啡与牛奶黄金配比，奶香四溢，口感香醇。\n主要原材料：浓缩咖啡，牛奶。\n图片仅供参考，请以实物为准。建议送达后尽快饮用。",
-						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0390_02p.jpg",
-						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0390_02.jpg",
-						"typeDesc": "咖啡",
-						"isHot": 1,
-						"enname": "Flat White",
-						"createdAt": "2021-01-24T10:53:54.000Z",
-						"updatedAt": "2021-01-24T10:53:54.000Z"
-					},
-					{
-						"id": 15,
-						"pid": "latte006",
-						"type": "latte",
-						"name": "黑糖啵啵拿铁",
-						"price": "28.00",
-						"desc": "独特的黑糖风味拿铁，佐以Q嫩儒糯的黑糖口味珍珠，创造出层次丰富的美妙口感。（建议搅拌后饮用）\n主要原材料：浓缩咖啡，黑糖味珍珠，纯牛奶，黑糖味调味糖浆，原味调味糖浆，可选择添加搅打奶油（含香草风味糖浆）\n图片仅供参考，请以实物为准，建议取餐后尽快饮用。",
-						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/IMG_0392_02p.jpg",
-						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/IMG_0392_02.jpg",
-						"typeDesc": "拿铁",
-						"isHot": 1,
-						"enname": "Brown Sugar Bubble Latte",
-						"createdAt": "2021-01-24T10:53:54.000Z",
-						"updatedAt": "2021-01-24T10:53:54.000Z"
-					},
-					{
-						"id": 18,
-						"pid": "fruit_tea001",
-						"type": "fruit_tea",
-						"name": "满杯百香果",
-						"price": "17.00",
-						"desc": "清新又浓郁的百香果香气，混合清新茉莉茶香，加上椰果与寒天的爽滑Q弹，满杯椰香果香茶香。\n主要原材料：椰果、百香果汁、原味寒天晶球、茉莉绿茶、原味调味糖浆。\n图片仅供参考，请以实物为准，建议取餐后尽快饮用。",
-						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/d001_small.png",
-						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/d001.png",
-						"typeDesc": "水果茶",
-						"isHot": 1,
-						"enname": "Passion Fruit & Coconut Jelly Jasmine Tea",
-						"createdAt": "2021-01-24T10:53:54.000Z",
-						"updatedAt": "2021-01-24T10:53:54.000Z"
-					},
-					{
-						"id": 20,
-						"pid": "fruit_tea005",
-						"type": "fruit_tea",
-						"name": "椰子冰",
-						"price": "20.00",
-						"desc": "【不含咖啡】优选纯牛奶为底，融进满满椰香，又加入柔和香草风味，椰子控必喝。\n主要原料：纯牛奶、椰子风味粉、香草风味糖浆、原味冰沙粉、冰块、稀奶油（含香草风味糖浆）。\n图片及包装仅供参考，请以实物为准。温馨提示：瑞纳冰系列产品形态为冰沙，无法进行少冰去冰操作，请您谅解。建议送达后尽快饮用。到店饮用口感更佳。 ",
-						"smallImg": "http://www.kangliuyong.com:10002/images/product_small/h001_small.png",
-						"largeImg": "http://www.kangliuyong.com:10002/images/product_large/h001.png",
-						"typeDesc": "水果茶",
-						"isHot": 1,
-						"enname": "Coconut ice",
-						"createdAt": "2021-01-24T10:53:54.000Z",
-						"updatedAt": "2021-01-24T10:53:54.000Z"
-					}
-				]
 			},
 
 			addHeight() {

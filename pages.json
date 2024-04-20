@@ -2,8 +2,7 @@
 	"easycom": {
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/login/login",
 			"style": {
 				//小程序 去顶
@@ -29,96 +28,72 @@
 			"style": {
 				"app-plus": {
 					"titleNView": false
-				}
+				},
+				"enablePullDownRefresh": true
 			}
 
 		},
 		{
 			"path": "pages/comment/index",
 			"style": {
-				"navigationBarTitleText": "全部评论"
+				"navigationBarTitleText": "全部评论",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/comment/reply",
 			"style": {
-				"navigationBarTitleText": "评论详情"
+				"navigationBarTitleText": "评论详情",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/detail/detail",
 			"style": {
-				"navigationBarTitleText": "店铺详情"
+				"navigationBarTitleText": "店铺详情",
+				"enablePullDownRefresh": true
 			}
 
 		},
 		{
-			"path": "pages/search/search",
+			"path": "pages/my/data/data",
 			"style": {
-				//小程序 去顶
-				"navigationStyle": "custom",
-				// h5  去顶
-				"app-plus": {
-					"titleNView": false
-				}
+				"enablePullDownRefresh": true
 			}
 
 		},
 		{
-			"path": "pages/my/proile/data/data",
+			"path": "pages/my/collection/collection",
 			"style": {
-
+				"navigationBarTitleText": "我的集咖",
+				"enablePullDownRefresh": true
 			}
-
 		},
 		{
-			"path": "pages/my/proile/address/address",
-			"style": {
-
-			}
-
-		},
-		{
-			"path": "pages/my/proile/collection/collection",
-			"style": {
-				"navigationBarTitleText": "我的集咖"
-			}
-
-		},
-		{
-			"path": "pages/my/proile/order/order",
-			"style": {
-
-			}
-
-		},
-		{
-			"path": "pages/proil/mys/mys",
-			"style": {
-
-			}
-
-		}, {
 			"path": "pages/wiki/wiki",
 			"style": {
 				// "navigationBarTitleText": "咖啡豆科普",
-				"enablePullDownRefresh": false
+
 			}
 
-		}
-	    ,{
-            "path" : "pages/wiki/bean_detail",
-            "style" :                                                                                    
-            {
+		}, 
+		{
+			"path": "pages/wiki/bean_detail",
+			"style": {
 				//小程序 去顶
 				"navigationStyle": "custom",
 				// h5  去顶
 				"app-plus": {
 					"titleNView": false
 				}
-            }
-            
-        }
+			}
+		
+		},{
+			"path": "pages/productList/productList",
+			"style": {
+			}
+
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
