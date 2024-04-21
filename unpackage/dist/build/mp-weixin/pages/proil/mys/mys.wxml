@@ -1,1 +1,0 @@
-<view class="img data-v-59d897e9"><view data-event-opts="{{[['tap',[['add']]]]}}" class="img-box data-v-59d897e9" bindtap="__e"><image src="{{src||''}}" mode class="data-v-59d897e9"></image></view></view>

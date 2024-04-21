@@ -177,20 +177,13 @@
 							icon: 'none'
 						})
 					} else {
-
-						uni.showToast({
+						getApp().updateUserInfo()
+						uni.showToast({ 
 							title: '修改资料成功',
 							icon: 'success',
 							duration: 1000
 						})
-						getUser().then(res => {
-							const userInfo = res.data;
-							uni.setStorageSync({ //存入Storage
-								key: 'userInfo',
-								data: userInfo
-							});
 							uni.navigateBack();
-						})
 					}
 
 				})

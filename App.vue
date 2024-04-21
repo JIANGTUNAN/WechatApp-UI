@@ -26,12 +26,7 @@
 				getUserById(uni.getStorageSync('userInfo').userId).then(res => {
 					const userInfo = res.data;
 					uni.removeStorageSync('userInfo');
-					// uni.setStorage({ //存入Storage
-					// 	key: 'userInfo',
-					// 	data: userInfo
-					// });
 					uni.setStorageSync('userInfo',userInfo);
-					// console.log(userInfo);
 				})
 			}
 		},
