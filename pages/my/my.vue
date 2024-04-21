@@ -63,15 +63,15 @@
 				]
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.getFindeMy();
 		},
-		async onPullDownRefresh() {
-			await getApp().updateUserInfo();
+		onPullDownRefresh() {
 			this.getFindeMy();
 		},
 		methods: {
-			getFindeMy() {
+			async getFindeMy() {
+				await getApp().updateUserInfo();
 				let userInfo = uni.getStorageSync('userInfo');
 				userInfo.avatarUrl = getApp().getAvatarUrl();
 				this.userInfo = userInfo

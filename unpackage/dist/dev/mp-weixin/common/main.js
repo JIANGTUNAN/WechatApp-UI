@@ -126,7 +126,7 @@ var _api = __webpack_require__(/*! @/api/api.js */ 10);var _default =
       return avatarUrl;
     },
     updateUserInfo: function updateUserInfo() {
-      (0, _api.getUserById)(uni.getStorageSync('userInfo').userId).then(function (res) {
+      return (0, _api.getUserById)(uni.getStorageSync('userInfo').userId).then(function (res) {
         var userInfo = res.data;
         uni.removeStorageSync('userInfo');
         uni.setStorageSync('userInfo', userInfo);

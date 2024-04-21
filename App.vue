@@ -23,7 +23,7 @@
 				return avatarUrl;
 			},
 			updateUserInfo() {
-				getUserById(uni.getStorageSync('userInfo').userId).then(res => {
+				return getUserById(uni.getStorageSync('userInfo').userId).then(res => {
 					const userInfo = res.data;
 					uni.removeStorageSync('userInfo');
 					uni.setStorageSync('userInfo',userInfo);

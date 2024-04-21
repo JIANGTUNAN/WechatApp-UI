@@ -223,19 +223,19 @@ var _api = __webpack_require__(/*! @/api/api.js */ 10);function _interopRequireD
 
 
   },
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     this.getFindeMy();
   },
-  onPullDownRefresh: function onPullDownRefresh() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                getApp().updateUserInfo());case 2:
-              _this.getFindeMy();case 3:case "end":return _context.stop();}}}, _callee);}))();
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.getFindeMy();
   },
   methods: {
-    getFindeMy: function getFindeMy() {
-      var userInfo = uni.getStorageSync('userInfo');
-      userInfo.avatarUrl = getApp().getAvatarUrl();
-      this.userInfo = userInfo;
-      uni.stopPullDownRefresh();
+    getFindeMy: function getFindeMy() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  getApp().updateUserInfo());case 2:
+                userInfo = uni.getStorageSync('userInfo');
+                userInfo.avatarUrl = getApp().getAvatarUrl();
+                _this.userInfo = userInfo;
+                uni.stopPullDownRefresh();case 6:case "end":return _context.stop();}}}, _callee);}))();
     },
     goToPages: function goToPages(item) {
       if (item.method && [item.method] in this) {
