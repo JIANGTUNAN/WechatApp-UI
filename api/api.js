@@ -75,7 +75,7 @@ export function postReply(data) {
 // 查询店铺评论
 export function getComment(data) {
   return request({
-    url: "/coffee/comment/findCommentByStoreId",
+    url: "/coffee/comment/findFirstCommentByStoreId",
     method: "GET",
     data,
   });

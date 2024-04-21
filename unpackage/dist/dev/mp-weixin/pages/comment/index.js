@@ -307,9 +307,8 @@ var _request = __webpack_require__(/*! @/request/request.js */ 9);function ownKe
         var list = (res === null || res === void 0 ? void 0 : res.data) || (res === null || res === void 0 ? void 0 : res.rows);
         _this.commentList = list.map(function (i) {return _objectSpread(_objectSpread({},
           i), {}, {
-            replyList: i.replyList.splice(0, 2),
-            imageList: i.imageList.map(function (item) {return _request.baseUrl + item;}) || [],
-            userAvatarUrl: _request.baseUrl + i.userAvatarUrl });});
+            replyNum: i.secondLevelComments.length,
+            replyList: i.secondLevelComments.splice(0, 2) });});
 
       });
     },

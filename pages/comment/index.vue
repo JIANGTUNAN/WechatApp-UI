@@ -11,21 +11,21 @@
 		</view>
 		<view class="comment" v-for="(comment, index) in commentList" :key="index">
 			<view class="left">
-				<image :src="comment.userAvatarUrl" mode="aspectFill"></image>
+				<image :src="baseUrl+comment.userAvatarUrl" mode="aspectFill"></image>
 			</view>
 			<view class="right">
 				<view class="top">
 					<view class="name">{{ comment.userNickName }}</view>
 				</view>
 				<view class="images" v-for="(src,idx) in comment.imageList" :key="idx">
-					<image :src="src" mode="widthFix"></image>
+					<image :src="baseUrl+src" mode="widthFix"></image>
 				</view>
 				<view class="content">{{ comment.commentContent }}</view>
 				<view class="reply-box">
 					<view class="item" v-for="(item, index) in comment.replyList" :key="index">
-						<view class="username">{{ item.userNickName }}</view>
+						<view class="username">{{ item.cuserNickName }}</view>
 						<view class="images small" v-for="(src,idx) in item.imageList" :key="idx">
-							<image :src="baseUrl+src" mode="widthFix"></image>
+							<image :src="baseUrl+cuserAvatarUrl" mode="widthFix"></image>
 						</view>
 						<view class="text">{{ item.commentContent }}</view>
 					</view>
@@ -64,7 +64,7 @@
 				moveX: 0,
 				windowWidth: '',
 				windowHeight: '',
-				baseUrl: baseUrl,
+				baseUrl,
 			};
 		},
 		components: {
@@ -126,9 +126,8 @@
 					const list = res?.data || res?.rows
 					this.commentList = list.map(i => ({
 						...i,
-						replyList: i.replyList.splice(0, 2),
-						imageList: i.imageList.map(item => baseUrl + item) || [],
-						userAvatarUrl: baseUrl + i.userAvatarUrl
+						replyNum:i.secondLevelComments.length,
+						replyList: i.secondLevelComments.splice(0, 2),
 					}))
 				})
 			},

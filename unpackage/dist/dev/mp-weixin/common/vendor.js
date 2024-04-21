@@ -18593,7 +18593,7 @@ function postReply(data) {
 // 查询店铺评论
 function getComment(data) {
   return (0, _request.default)({
-    url: "/coffee/comment/findCommentByStoreId",
+    url: "/coffee/comment/findFirstCommentByStoreId",
     method: "GET",
     data: data });
 
