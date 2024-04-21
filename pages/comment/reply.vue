@@ -22,7 +22,7 @@
 			<view class="content">{{ comment.commentContent }}</view>
 		</view>
 		<view class="all-reply">
-			<view class="all-reply-top">全部回复（{{ comment.replyNum }}）</view>
+			<view class="all-reply-top">全部回复（{{ comment.secondLevelComments.length }}）</view>
 			<view class="item" v-for="(item, index) in comment.secondLevelComments" :key="index">
 				<view class="comment">
 					<view class="top">

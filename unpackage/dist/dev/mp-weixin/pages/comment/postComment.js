@@ -110,11 +110,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
-      _vm.visable = false
-    }
-  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -177,7 +172,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _request = __webpack_require__(/*! @/request/request.js */ 9);
 
 
@@ -209,8 +203,13 @@ var _api = __webpack_require__(/*! @/api/api.js */ 145); //
 //
 //
 //
-//
-var _default2 = { name: 'commentPoster', props: { storeId: { type: Number | String, default: function _default() {return null;} }, userId: { type: Number | String, default: function _default() {return null;} } }, data: function data() {return { visable: false, files: [], commentContent: '', maxImage: 3, loading: false, replyId: null };}, methods: { open: function open(id) {this.replyId = id || null;this.visable = true;
+var _default2 = { name: 'commentPoster', props: { storeId: { type: Number | String, default: function _default() {return null;} }, userId: { type: Number | String, default: function _default() {return null;} } }, data: function data() {return { visable: false, files: [], commentContent: '', maxImage: 3, loading: false, replyId: null };}, methods: { open: function open(id) {this.replyId = id || null;
+      this.visable = true;
+    },
+    close: function close() {
+      this.visable = false;
+      this.files = [];
+      this.commentContent = '';
     },
 
     addImage: function addImage() {var _this = this;
@@ -223,6 +222,10 @@ var _default2 = { name: 'commentPoster', props: { storeId: { type: Number | Stri
         } });
 
 
+    },
+
+    delImage: function delImage(index) {
+      this.files.splice(index, 1);
     },
     submit: function submit() {
       if (!this.userId) {
@@ -246,7 +249,7 @@ var _default2 = { name: 'commentPoster', props: { storeId: { type: Number | Stri
 
         }
         _self.loading = false;
-        _self.visable = false;
+        _self.close();
         _self.$emit('finish');
       };
       _self.files.forEach(function (path, index) {

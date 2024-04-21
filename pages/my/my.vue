@@ -66,7 +66,8 @@
 		onLoad() {
 			this.getFindeMy();
 		},
-		onPullDownRefresh() {
+		async onPullDownRefresh() {
+			await getApp().updateUserInfo();
 			this.getFindeMy();
 		},
 		methods: {

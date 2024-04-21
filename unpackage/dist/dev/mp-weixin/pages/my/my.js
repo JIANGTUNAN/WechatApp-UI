@@ -98,10 +98,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 277))
+      return Promise.all(/*! import() | uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 249))
     },
     uIcon: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 268))
+      return Promise.all(/*! import() | uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 240))
     }
   }
 } catch (e) {
@@ -158,7 +158,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 35));
 
 
 
@@ -195,43 +195,44 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _api = __webpack_require__(/*! @/api/api.js */ 145); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = { data: function data() {return { myList: "", userInfo: {}, list: [{ title: "个人资料修改", url: "./data/data", id: 1 }, { title: "我的集咖", url: "./collection/collection", id: 2 }, { title: "退出登录", id: 3, method: 'logout', button: true }] };}, onLoad: function onLoad() {this.getFindeMy();}, onPullDownRefresh: function onPullDownRefresh() {this.getFindeMy();}, methods: { getFindeMy: function getFindeMy() {var userInfo = uni.getStorageSync('userInfo');
+var _api = __webpack_require__(/*! @/api/api.js */ 145);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+
+{
+  data: function data() {
+    return {
+      myList: "",
+      userInfo: {},
+      list: [{
+        title: "个人资料修改",
+        url: "./data/data",
+        id: 1 },
+
+      {
+        title: "我的集咖",
+        url: "./collection/collection",
+        id: 2 },
+
+      {
+        title: "退出登录",
+        id: 3,
+        method: 'logout',
+        button: true }] };
+
+
+
+  },
+  onLoad: function onLoad() {
+    this.getFindeMy();
+  },
+  onPullDownRefresh: function onPullDownRefresh() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                getApp().updateUserInfo());case 2:
+              _this.getFindeMy();case 3:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  methods: {
+    getFindeMy: function getFindeMy() {
+      var userInfo = uni.getStorageSync('userInfo');
       userInfo.avatarUrl = getApp().getAvatarUrl();
       this.userInfo = userInfo;
       uni.stopPullDownRefresh();

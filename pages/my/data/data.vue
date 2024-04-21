@@ -67,9 +67,9 @@
 	export default {
 		data() {
 			return {
-				sysNickName: "张三",
+				sysNickName: "",
 				userId: null,
-				introduction: "我爱睡觉",
+				introduction: "",
 				school: "",
 				sex: "",
 				avatarUrl: '',
@@ -92,7 +92,6 @@
 		},
 		methods: {
 			init(){
-				
 					const userInfo = uni.getStorageSync('userInfo');
 					this.userId = userInfo.userId;
 					userInfo.avatarUrl = getApp().getAvatarUrl();
@@ -199,7 +198,8 @@
 			},
 
 		},
-		onPullDownRefresh() {
+		async onPullDownRefresh() {
+			await getApp().updateUserInfo();
 			this.init();
 		},
 		onLoad() {
