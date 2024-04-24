@@ -1,1 +1,0 @@
-<view class="{{['u-list-item','data-v-31deb2b2','vue-ref','u-list-item-'+anchor]}}" anchor="{{'u-list-item-'+anchor}}" data-ref="{{'u-list-item-'+anchor}}"><slot></slot></view>
