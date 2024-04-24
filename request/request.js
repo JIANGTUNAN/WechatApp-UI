@@ -1,7 +1,6 @@
 // 请求地址
-// export var baseUrl = "http://frps.tolan.top:7080";
-// export var baseUrl = "http://47.236.14.30:7080"
-export var baseUrl = "https://coffee.frps.tolan.top"
+export var baseUrl = "http://localhost:8080"
+// export var baseUrl = "https://coffee.frps.tolan.top"
 // 请求函数封装
 const request = function(options = {}) {
 	// 请求地址拼接
