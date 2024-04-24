@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "评论详情",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "post-comment": "/pages/comment/postComment"
-  }
-}
